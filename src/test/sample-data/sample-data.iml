@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4" relativePaths="true" type="JAVA_MODULE">
+  <component name="DependecySynchronizer">
+    <eclipse-dependency tracedFile="file://$MODULE_DIR$/.classpath" module="sample-data" library="1sample-data-eclipse_dependencies" />
+  </component>
+  <component name="ModuleRootManager" />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <output url="file://$MODULE_DIR$/classes/production/sample-data" />
+    <exclude-output />
+    <output-test url="file://$MODULE_DIR$/classes/test/sample-data" />
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="1sample-data-eclipse_dependencies" level="project" />
+    <orderEntryProperties />
+  </component>
+</module>
+
