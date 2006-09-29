@@ -1,12 +1,9 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileAdapter;
-import com.intellij.openapi.vfs.VirtualFileEvent;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependecySynchronizer.ClasspathFileModificationListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,28 +46,10 @@ class RegistrationHelper {
         }
     }
 
-    class ClasspathFileModificationListener extends VirtualFileAdapter {
-
-        private final VirtualFile classpathVirtualFile;
-
-        public ClasspathFileModificationListener(VirtualFile classpathVirtualFile) {
-            this.classpathVirtualFile = classpathVirtualFile;
-        }
-
-        public void contentsChanged(VirtualFileEvent event) {
-            if (classpathVirtualFile.getPath().equals(event.getFile().getPath())) {
-                Library.ModifiableModel dependencyLibraryModel = dependecySynchronizer.refreshEclipseDependencies(classpathVirtualFile);
-                dependecySynchronizer.displayInformationDialog(dependencyLibraryModel.getUrls(OrderRootType.CLASSES));
-            }
-        }
-    }
-
-    void registerClasspathFileModificationListener(VirtualFile classpathVirtualFile, Module currentModule, String libraryName) {
-        ClasspathFileModificationListener listener;
+    void registerClasspathFileModificationListener(VirtualFile classpathVirtualFile, String libraryName, ClasspathFileModificationListener listener, Module currentModule) {
         if (!isFileRegistered(classpathVirtualFile)) {
-            listener = new ClasspathFileModificationListener(classpathVirtualFile);
             getVirtualFileManager().addVirtualFileListener(listener);
-            activeListeners.put(classpathVirtualFile.getUrl(), new RegistrationHelper.Registration(listener, currentModule.getName(), libraryName));
+            activeListeners.put(classpathVirtualFile.getUrl(), new Registration(listener, currentModule.getName(), libraryName));
         }
     }
 

@@ -17,17 +17,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\PIOTRGA\Src\intellij-plugin-eclipse-integration\src\main\java\com\javaexpert\intellij\plugins\eclipseclasspath\DependecySynchronizer.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/test.xml" afterPath="$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/intellij-plugin-eclipse-integration.iml" afterPath="$PROJECT_DIR$/intellij-plugin-eclipse-integration.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/RegistrationHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/DependecySynchronizer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/ConfigurationHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/RefreshEclipseDependenciesAction.java" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/RefreshEclipseDependenciesAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/LibraryHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/LibraryHelper.java" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/LibraryHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/EclipseToolsTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/EclipseToolsTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/RegistrationHelper.java" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/RegistrationHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/ConfigurationHelper.java" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/ConfigurationHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/DependecySynchronizer.java" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/DependecySynchronizer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/intellij-plugin-eclipse-integration.iws" afterPath="$PROJECT_DIR$/intellij-plugin-eclipse-integration.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/EclipseTools.java" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/EclipseTools.java" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -205,7 +201,7 @@
           <file leaf-file-name="RefreshEclipseDependenciesAction.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/RefreshEclipseDependenciesAction.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="18" column="26" selection-start="678" selection-end="678" vertical-scroll-proportion="0.53321034">
+                <state line="18" column="26" selection-start="678" selection-end="678" vertical-scroll-proportion="0.34241706">
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -216,7 +212,7 @@
           <file leaf-file-name="DependecySynchronizer.java" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/DependecySynchronizer.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="127" column="47" selection-start="5592" selection-end="5592" vertical-scroll-proportion="0.33206832">
+                <state line="93" column="65" selection-start="4208" selection-end="4208" vertical-scroll-proportion="0.29312426">
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -227,7 +223,7 @@
           <file leaf-file-name="RegistrationHelper.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/RegistrationHelper.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="29" column="27" selection-start="1230" selection-end="1230" vertical-scroll-proportion="0.39658445">
+                <state line="49" column="172" selection-start="1895" selection-end="1895" vertical-scroll-proportion="0.5693607">
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -238,7 +234,7 @@
           <file leaf-file-name="ConfigurationHelper.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/ConfigurationHelper.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="29" column="0" selection-start="1226" selection-end="1226" vertical-scroll-proportion="0.9354839">
+                <state line="18" column="0" selection-start="610" selection-end="610" vertical-scroll-proportion="0.36911944">
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -249,8 +245,10 @@
           <file leaf-file-name="LibraryHelper.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/LibraryHelper.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="16" column="52" selection-start="664" selection-end="664" vertical-scroll-proportion="0.19354838">
-                  <folding />
+                <state line="62" column="16" selection-start="2517" selection-end="2517" vertical-scroll-proportion="0.2110977">
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -258,7 +256,7 @@
           <file leaf-file-name="XmlToolsTest.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/XmlToolsTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="6" column="13" selection-start="163" selection-end="163" vertical-scroll-proportion="0.19354838">
+                <state line="6" column="13" selection-start="163" selection-end="163" vertical-scroll-proportion="0.123039804">
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -269,7 +267,7 @@
           <file leaf-file-name="test.xml" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/test.xml">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="23" column="0" selection-start="1051" selection-end="1051" vertical-scroll-proportion="0.7419355">
+                <state line="23" column="0" selection-start="1051" selection-end="1051" vertical-scroll-proportion="0.4716526">
                   <folding />
                 </state>
               </provider>
@@ -282,7 +280,7 @@
           <file leaf-file-name="EclipseTools.java" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/EclipseTools.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="22" column="19" selection-start="870" selection-end="870" vertical-scroll-proportion="0.66548043">
+                <state line="22" column="19" selection-start="887" selection-end="887" vertical-scroll-proportion="0.43287036">
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -881,10 +879,10 @@
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="7" />
       <window_info id="Checkstyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="-1" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13605729" order="3" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17228307" order="3" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32887402" order="1" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32887402" order="8" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32887402" order="8" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="6" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="0" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
@@ -915,7 +913,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="PUT_FOCUS_INTO_COMMENT" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="LAST_COMMIT_MESSAGE" value="Major refactorings" />
@@ -1025,7 +1023,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/EclipseTools.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="19" selection-start="870" selection-end="870" vertical-scroll-proportion="0.66548043">
+        <state line="22" column="19" selection-start="887" selection-end="887" vertical-scroll-proportion="0.43287036">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1041,34 +1039,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/RegistrationHelper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/RefreshEclipseDependenciesAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="27" selection-start="1230" selection-end="1230" vertical-scroll-proportion="0.39658445">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/ConfigurationHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="1226" selection-end="1226" vertical-scroll-proportion="0.9354839">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/LibraryHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="52" selection-start="664" selection-end="664" vertical-scroll-proportion="0.19354838">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/XmlToolsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="163" selection-end="163" vertical-scroll-proportion="0.19354838">
+        <state line="18" column="26" selection-start="678" selection-end="678" vertical-scroll-proportion="0.34241706">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1077,14 +1050,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/test.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="1051" selection-end="1051" vertical-scroll-proportion="0.7419355">
+        <state line="23" column="0" selection-start="1051" selection-end="1051" vertical-scroll-proportion="0.4716526">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/RefreshEclipseDependenciesAction.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/XmlToolsTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="26" selection-start="678" selection-end="678" vertical-scroll-proportion="0.53321034">
+        <state line="6" column="13" selection-start="163" selection-end="163" vertical-scroll-proportion="0.123039804">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/ConfigurationHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="610" selection-end="610" vertical-scroll-proportion="0.36911944">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/RegistrationHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="172" selection-start="1895" selection-end="1895" vertical-scroll-proportion="0.5693607">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/LibraryHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="16" selection-start="2517" selection-end="2517" vertical-scroll-proportion="0.2110977">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1093,7 +1093,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/DependecySynchronizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="47" selection-start="5592" selection-end="5592" vertical-scroll-proportion="0.33206832">
+        <state line="93" column="65" selection-start="4208" selection-end="4208" vertical-scroll-proportion="0.29312426">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
