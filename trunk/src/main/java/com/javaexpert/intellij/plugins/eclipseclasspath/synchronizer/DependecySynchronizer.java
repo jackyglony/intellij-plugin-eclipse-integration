@@ -14,6 +14,7 @@ import com.intellij.openapi.vfs.VirtualFileAdapter;
 import com.intellij.openapi.vfs.VirtualFileEvent;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseTools;
+import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.RegistrationHelper.Registration;
 import org.jdom.Element;
 
 import java.util.List;
@@ -34,8 +35,12 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
         registerLoadedListeners();
     }
 
+    public void projectClosed() {
+        registrationHelper.unregisterAllListeners();
+    }
+
     private void registerLoadedListeners() {
-        for (Map.Entry<String, RegistrationHelper.Registration> e : configurationHelper.loadedListeners.entrySet()) {
+        for (Map.Entry<String, Registration> e : configurationHelper.loadedListeners.entrySet()) {
             try {
                 registerListener(
                         VirtualFileManager.getInstance().findFileByUrl(e.getKey())
@@ -46,19 +51,14 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
         }
     }
 
-    public void projectClosed() {
-        registrationHelper.unregisterAllListeners();
-    }
-
     private static final String ECLIPSE_DEPENDENCIES_SUFFIX = "-eclipse_dependencies";
 
     public void stopTracingChanges(final Module currentModule, VirtualFile file) {
-        RegistrationHelper.Registration registration = registrationHelper.unregisterFileSystemListener(file);
+        Registration registration = registrationHelper.unregisterFileSystemListener(file);
         libraryHelper.removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(currentModule, registration.libraryName);
     }
 
     public void traceChanges(Module currentModule, VirtualFile classpathVirtualFile) {
-
         if (currentModule == null) {
             Messages.showWarningDialog("Please open any project.", "No open projects");
             return;
