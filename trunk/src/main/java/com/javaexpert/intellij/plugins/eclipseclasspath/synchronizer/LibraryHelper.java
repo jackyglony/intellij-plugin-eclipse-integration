@@ -9,12 +9,13 @@ import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
+import com.intellij.openapi.util.Computable;
 
 import java.util.List;
 
 class LibraryHelper {
 
-    void removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(final Module currentModule, String libraryName) {
+    public void removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(final Module currentModule, String libraryName) {
         final Library eclipseDepsLibrary = getLibraryTable(currentModule).getLibraryByName(libraryName);
 
         if (eclipseDepsLibrary != null) {
@@ -59,7 +60,7 @@ class LibraryHelper {
         return lib.matches("[a-zA-Z]:[/\\\\].+") || lib.startsWith("/");
     }
 
-    void addLibraryDependencyToModule(Library newLibrary, Module module) {
+    public void addLibraryDependencyToModuleIfNotDependantAlready(Module module, Library newLibrary) {
         ModifiableRootModel moduleModel = getModuleRootManager(module).getModifiableModel();
         if (moduleModel.findLibraryOrderEntry(newLibrary) == null) {
             moduleModel.addLibraryEntry(newLibrary);
@@ -67,11 +68,37 @@ class LibraryHelper {
         }
     }
 
-    void removeDependencyBetweenModuleAndLibrary(ModifiableRootModel moduleModel, Library library) {
+    public void removeDependencyBetweenModuleAndLibrary(ModifiableRootModel moduleModel, Library library) {
         LibraryOrderEntry libraryReference = moduleModel.findLibraryOrderEntry(library);
         if (libraryReference != null) {
             moduleModel.removeOrderEntry(libraryReference);
             moduleModel.commit();
         }
+    }
+
+    public Library getOrCreateLibrary(Module currentModule, final String libraryName) {
+        final LibraryTable libraryTable = getLibraryTable(currentModule);
+        Library res = libraryTable.getLibraryByName(libraryName);
+
+        if (res == null) {
+            res = createLibrary(libraryTable, libraryName);
+        }
+        return res;
+    }
+
+    public Library createLibrary(final LibraryTable libraryTable, final String libraryName) {
+        Library res;
+        res = ApplicationManager.getApplication().runWriteAction(new Computable<Library>() {
+            public Library compute() {
+                return libraryTable.createLibrary(libraryName);
+            }
+        });
+        return res;
+    }
+
+    void repopulateLibraryWithLibs(Library.ModifiableModel libraryModel, String classpathFileDir, List<String> libs) {
+        clearLibrary(libraryModel);
+        addJarsToLibrary(classpathFileDir, libs, libraryModel);
+        libraryModel.commit();
     }
 }

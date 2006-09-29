@@ -2,10 +2,12 @@ package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
 import org.jdom.Element;
 
+import java.util.HashMap;
 import java.util.Map;
 
 class ConfigurationHelper {
     private DependecySynchronizer synchronizer;
+    Map<String, RegistrationHelper.Registration> loadedListeners = new HashMap<String, RegistrationHelper.Registration>();
 
     public ConfigurationHelper(DependecySynchronizer dependecySynchronizer) {
         this.synchronizer = dependecySynchronizer;
@@ -14,7 +16,7 @@ class ConfigurationHelper {
     void readExternal(Element element) {
         for (Object o : element.getChildren()) {
             Element e = (Element) o;
-            synchronizer.loadedListeners.put(e.getAttributeValue("tracedFile"), new RegistrationHelper.Registration(null, e.getAttributeValue("module"), e.getAttributeValue("library")));
+            loadedListeners.put(e.getAttributeValue("tracedFile"), new RegistrationHelper.Registration(null, e.getAttributeValue("module"), e.getAttributeValue("library")));
         }
     }
 
