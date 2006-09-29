@@ -17,8 +17,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
+      <change type="DELETED" beforePath="C:\PIOTRGA\Src\intellij-plugin-eclipse-integration\Eclipse-Dependencies-IntelliJ-Plugin.ipr" afterPath="" />
+      <change type="DELETED" beforePath="C:\PIOTRGA\Src\intellij-plugin-eclipse-integration\Eclipse-Dependencies-IntelliJ-Plugin.iml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/XmlToolsTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/XmlToolsTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/RefreshEclipseDependenciesAction.java" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/RefreshEclipseDependenciesAction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/DependecySynchronizer.java" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/DependecySynchronizer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/intellij-plugin-eclipse-integration.iws" afterPath="$PROJECT_DIR$/intellij-plugin-eclipse-integration.iws" />
+      <change type="DELETED" beforePath="C:\PIOTRGA\Src\intellij-plugin-eclipse-integration\Eclipse-Dependencies-IntelliJ-Plugin.iws" afterPath="" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -97,7 +102,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/XmlToolsTest.java" line="19" class="com.javaexpert.intellij.plugins.eclipseclasspath.XmlToolsTest" package="com.javaexpert.intellij.plugins.eclipseclasspath">
+      <breakpoint url="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/XmlToolsTest.java" line="16" class="com.javaexpert.intellij.plugins.eclipseclasspath.XmlToolsTest" package="com.javaexpert.intellij.plugins.eclipseclasspath">
         <option name="ENABLED" value="true" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
         <option name="LOG_ENABLED" value="false" />
@@ -193,10 +198,10 @@
     <splitter split-orientation="horizontal" split-proportion="0.45303327">
       <split-first>
         <leaf>
-          <file leaf-file-name="RefreshEclipseDependenciesAction.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/RefreshEclipseDependenciesAction.java">
+          <file leaf-file-name="XmlTools.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/XmlTools.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="18" column="26" selection-start="678" selection-end="678" vertical-scroll-proportion="0.34241706">
+                <state line="10" column="13" selection-start="289" selection-end="289" vertical-scroll-proportion="0.2014218">
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -204,13 +209,33 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="DependecySynchronizer.java" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="DependecySynchronizer.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/DependecySynchronizer.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="128" column="56" selection-start="5453" selection-end="5453" vertical-scroll-proportion="0.26176116">
+                <state line="51" column="47" selection-start="2143" selection-end="2143" vertical-scroll-proportion="0.5536791">
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="EclipseToolsTest.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/EclipseToolsTest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="11" column="13" selection-start="193" selection-end="193" vertical-scroll-proportion="0.22557297">
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Messages.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="jar://$INTELLIJ_HOME$/lib/src/src_openapi.zip!/com/intellij/openapi/ui/Messages.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="272" column="23" selection-start="10844" selection-end="10844" vertical-scroll-proportion="0.020506635">
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -218,7 +243,7 @@
           <file leaf-file-name="RegistrationHelper.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/RegistrationHelper.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="48" column="172" selection-start="1894" selection-end="1894" vertical-scroll-proportion="0.5693607">
+                <state line="48" column="172" selection-start="1894" selection-end="1894" vertical-scroll-proportion="0.6043426">
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -240,7 +265,7 @@
           <file leaf-file-name="LibraryHelper.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/LibraryHelper.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="62" column="16" selection-start="2517" selection-end="2517" vertical-scroll-proportion="0.2110977">
+                <state line="62" column="16" selection-start="2517" selection-end="2517" vertical-scroll-proportion="0.05066345">
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -251,10 +276,19 @@
           <file leaf-file-name="XmlToolsTest.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/XmlToolsTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="6" column="13" selection-start="163" selection-end="163" vertical-scroll-proportion="0.123039804">
+                <state line="10" column="51" selection-start="292" selection-end="292" vertical-scroll-proportion="0.20506634">
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name=".classpath" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/.classpath">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="16" column="39" selection-start="1151" selection-end="1190" vertical-scroll-proportion="0.32810616">
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -275,7 +309,7 @@
           <file leaf-file-name="EclipseTools.java" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/EclipseTools.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="10" column="13" selection-start="241" selection-end="241" vertical-scroll-proportion="0.19675925">
+                <state line="22" column="52" selection-start="931" selection-end="931" vertical-scroll-proportion="0.43287036">
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -473,6 +507,10 @@
           <option name="myItemId" value="PsiDirectory:C:\PIOTRGA\Src\intellij-plugin-eclipse-integration\src\test\java" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:C:\PIOTRGA\Src\intellij-plugin-eclipse-integration\src\test\java\com\javaexpert\intellij\plugins\eclipseclasspath" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
       </PATH>
       <PATH>
         <PATH_ELEMENT>
@@ -573,7 +611,7 @@
       <showLibraryContents />
       <hideEmptyPackages />
       <abbreviatePackageNames />
-      <showStructure ProjectPane="false" Scope="false" PackagesPane="false" Favorites="false" />
+      <showStructure Favorites="false" Scope="false" PackagesPane="false" ProjectPane="false" />
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
@@ -636,7 +674,7 @@
     </key>
   </component>
   <component name="RestoreUpdateTree" />
-  <component name="RunManager" selected="JUnit.XmlToolsTest">
+  <component name="RunManager" selected="Plugin.Hello">
     <tempConfiguration default="false" name="XmlToolsTest" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <pattern value="com.javaexpert.intellij.plugins.eclipseclasspath.*" />
       <module name="intellij-plugin-eclipse-integration" />
@@ -665,24 +703,17 @@
         <option name="Make" value="true" />
       </method>
     </tempConfiguration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$INTELLIJ_HOME$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="" />
@@ -703,10 +734,17 @@
         <option name="Make" value="true" />
       </method>
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+    <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$INTELLIJ_HOME$/bin/appletviewer.policy" />
       <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
       <option name="MAIN_CLASS_NAME" />
@@ -792,7 +830,6 @@
     <queries />
   </component>
   <component name="ScopeViewComponent">
-    <subPane subId="Problems" />
     <subPane subId="Production">
       <PATH>
         <PATH_ELEMENT>
@@ -801,6 +838,7 @@
         </PATH_ELEMENT>
       </PATH>
     </subPane>
+    <subPane subId="Problems" />
   </component>
   <component name="SelectInManager" />
   <component name="StarteamConfiguration">
@@ -867,14 +905,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1283" y="-3" width="2429" height="1030" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="SQL" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="-1" />
+      <window_info id="SQL" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="0" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="7" />
-      <window_info id="Checkstyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="-1" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17228307" order="3" />
+      <window_info id="Checkstyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17228307" order="3" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32887402" order="1" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32887402" order="8" />
@@ -987,17 +1025,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/.classpath">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="39" selection-start="1151" selection-end="1190" vertical-scroll-proportion="0.516129">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="63" selection-start="63" selection-end="63" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/sample-data/.classpath">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="0" selection-end="1292" vertical-scroll-proportion="0.58064514">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/RefreshEclipseDependenciesAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="54" selection-start="650" selection-end="650" vertical-scroll-proportion="0.087677725">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1010,41 +1057,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/sample-data/.classpath">
+    <entry file="jar://$INTELLIJ_HOME$/lib/src/src_openapi.zip!/com/intellij/openapi/ui/Messages.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="0" selection-end="1292" vertical-scroll-proportion="0.58064514">
+        <state line="272" column="23" selection-start="10844" selection-end="10844" vertical-scroll-proportion="0.020506635">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/EclipseToolsTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/RegistrationHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="193" selection-end="193" vertical-scroll-proportion="0.34501845">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/RefreshEclipseDependenciesAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="26" selection-start="678" selection-end="678" vertical-scroll-proportion="0.34241706">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/test.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="1051" selection-end="1051" vertical-scroll-proportion="0.4716526">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/XmlToolsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="163" selection-end="163" vertical-scroll-proportion="0.123039804">
+        <state line="48" column="172" selection-start="1894" selection-end="1894" vertical-scroll-proportion="0.6043426">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1060,27 +1082,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/RegistrationHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="172" selection-start="1894" selection-end="1894" vertical-scroll-proportion="0.5693607">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/LibraryHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="16" selection-start="2517" selection-end="2517" vertical-scroll-proportion="0.2110977">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/EclipseTools.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="241" selection-end="241" vertical-scroll-proportion="0.19675925">
+        <state line="22" column="52" selection-start="931" selection-end="931" vertical-scroll-proportion="0.43287036">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1089,10 +1093,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/DependecySynchronizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="56" selection-start="5453" selection-end="5453" vertical-scroll-proportion="0.26176116">
+        <state line="51" column="47" selection-start="2143" selection-end="2143" vertical-scroll-proportion="0.5536791">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/LibraryHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="16" selection-start="2517" selection-end="2517" vertical-scroll-proportion="0.05066345">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/XmlToolsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="51" selection-start="292" selection-end="292" vertical-scroll-proportion="0.20506634">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/EclipseToolsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="13" selection-start="193" selection-end="193" vertical-scroll-proportion="0.22557297">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/test.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="1051" selection-end="1051" vertical-scroll-proportion="0.4716526">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/.classpath">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="39" selection-start="1151" selection-end="1190" vertical-scroll-proportion="0.32810616">
+          <folding />
         </state>
       </provider>
     </entry>
