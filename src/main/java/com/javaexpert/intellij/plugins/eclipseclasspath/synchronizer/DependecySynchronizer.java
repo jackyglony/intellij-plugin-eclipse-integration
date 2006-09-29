@@ -21,8 +21,11 @@ import java.util.List;
 import java.util.Map;
 
 public class DependecySynchronizer implements ModuleComponent, JDOMExternalizable {
+    private static final String ECLIPSE_DEPENDENCIES_SUFFIX = "-eclipse_dependencies";
 
     Module module;
+
+    // Helpers
     LibraryHelper libraryHelper = new LibraryHelper();
     ConfigurationHelper configurationHelper = new ConfigurationHelper(this);
     RegistrationHelper registrationHelper = new RegistrationHelper(this);
@@ -39,20 +42,6 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
         registrationHelper.unregisterAllListeners();
     }
 
-    private void registerLoadedListeners() {
-        for (Map.Entry<String, Registration> e : configurationHelper.loadedListeners.entrySet()) {
-            try {
-                registerListener(
-                        VirtualFileManager.getInstance().findFileByUrl(e.getKey())
-                        , module, e.getValue().libraryName);
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
-        }
-    }
-
-    private static final String ECLIPSE_DEPENDENCIES_SUFFIX = "-eclipse_dependencies";
-
     public void stopTracingChanges(final Module currentModule, VirtualFile file) {
         Registration registration = registrationHelper.unregisterFileSystemListener(file);
         libraryHelper.removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(currentModule, registration.libraryName);
@@ -64,11 +53,25 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
             return;
         }
 
-        String libraryName = Messages.showInputDialog("Please enter library name.", "Creating library for Eclipse dependencies", Messages.getQuestionIcon(), computeEclipseDependenciesLibraryDefaultName(currentModule), null);
-        registerListener(classpathVirtualFile, currentModule, libraryName);
+        String libraryName = Messages.showInputDialog(currentModule.getProject(), "Please enter library name.", "Creating library for Eclipse dependencies", Messages.getQuestionIcon(), computeEclipseDependenciesLibraryDefaultName(currentModule), null);
+        if (libraryName != null) {
+            registerListener(classpathVirtualFile, currentModule, libraryName);
 
-        Library.ModifiableModel model = refreshEclipseDependencies(classpathVirtualFile);
-        displayInformationDialog(model.getUrls(OrderRootType.CLASSES));
+            Library.ModifiableModel model = refreshEclipseDependencies(classpathVirtualFile);
+            displayInformationDialog(model.getUrls(OrderRootType.CLASSES));
+        }
+    }
+
+    private void registerLoadedListeners() {
+        for (Map.Entry<String, Registration> e : configurationHelper.loadedListeners.entrySet()) {
+            try {
+                registerListener(
+                        VirtualFileManager.getInstance().findFileByUrl(e.getKey())
+                        , module, e.getValue().libraryName);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
     private void registerListener(VirtualFile classpathVirtualFile, Module currentModule, String libraryName) {

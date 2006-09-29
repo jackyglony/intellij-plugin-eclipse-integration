@@ -43,15 +43,15 @@ public class RefreshEclipseDependenciesAction extends AnAction {
         }
     }
 
-    private VirtualFile getVirtualFile(AnActionEvent e) {
+    protected VirtualFile getVirtualFile(AnActionEvent e) {
         return (VirtualFile) e.getDataContext().getData(DataConstants.VIRTUAL_FILE);
     }
 
-    private Module getModule(AnActionEvent e) {
+    protected Module getModule(AnActionEvent e) {
         return (Module) e.getDataContext().getData(DataConstants.MODULE);
     }
 
-    private DependecySynchronizer getDependencySynchronizer(AnActionEvent e) {
+    protected DependecySynchronizer getDependencySynchronizer(AnActionEvent e) {
         return getModule(e).getComponent(DependecySynchronizer.class);
     }
 }
