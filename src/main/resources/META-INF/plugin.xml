@@ -1,19 +1,25 @@
 <!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
 <idea-plugin>
-  <name>Eclipse Dependency Sync</name>
-  <description>This plugin keeps in sync a IntelliJ project classpath when Eclipse .classpath file changes. It might be useful for developers using IntelliJ in a team in which the main IDE is Eclipse.</description>
-  <version>0.9</version>
-  <vendor>Piotr Gabryanczyk</vendor>
-  <idea-version since-build="5581"/>
+    <name>Eclipse Dependency Sync</name>
+    <description>This plugin keeps in sync a IntelliJ project classpath when Eclipse .classpath file changes. It might
+        be useful for developers using IntelliJ in a team in which the main IDE is Eclipse.
+    </description>
+    <version>0.9</version>
+    <vendor>Piotr Gabryanczyk</vendor>
+    <idea-version since-build="5581"/>
     <module-components>
         <component>
-            <implementation-class>com.javaexpert.intellij.plugins.eclipseclasspath.DependecySynchronizer</implementation-class>
+            <implementation-class>com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependecySynchronizer
+            </implementation-class>
         </component>
     </module-components>
- 
+
     <actions>
-        <action id="RefreshEclipseDeps" class="com.javaexpert.intellij.plugins.eclipseclasspath.RefreshEclipseDependenciesAction" text="Refresh Eclipse Deps" description="Creates or refreshes Eclipse dependency library" icon="/icons/synced.gif">
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="first" />            
+        <action id="RefreshEclipseDeps"
+                class="com.javaexpert.intellij.plugins.eclipseclasspath.RefreshEclipseDependenciesAction"
+                text="Refresh Eclipse Deps" description="Creates or refreshes Eclipse dependency library"
+                icon="/icons/synced.gif">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
         </action>
     </actions>
 </idea-plugin>
