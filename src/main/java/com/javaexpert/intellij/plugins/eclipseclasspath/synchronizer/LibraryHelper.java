@@ -60,7 +60,7 @@ class LibraryHelper {
         return lib.matches("[a-zA-Z]:[/\\\\].+") || lib.startsWith("/");
     }
 
-    public void addLibraryDependencyToModuleIfNotDependantAlready(Module module, Library newLibrary) {
+    public void makeModuleDependentOnLibrary(Module module, Library newLibrary) {
         ModifiableRootModel moduleModel = getModuleRootManager(module).getModifiableModel();
         if (moduleModel.findLibraryOrderEntry(newLibrary) == null) {
             moduleModel.addLibraryEntry(newLibrary);
@@ -96,9 +96,9 @@ class LibraryHelper {
         return res;
     }
 
-    void repopulateLibraryWithLibs(Library.ModifiableModel libraryModel, String classpathFileDir, List<String> libs) {
+    void repopulateLibraryWithJars(Library.ModifiableModel libraryModel, String libsBaseDir, List<String> libs) {
         clearLibrary(libraryModel);
-        addJarsToLibrary(classpathFileDir, libs, libraryModel);
+        addJarsToLibrary(libsBaseDir, libs, libraryModel);
         libraryModel.commit();
     }
 }

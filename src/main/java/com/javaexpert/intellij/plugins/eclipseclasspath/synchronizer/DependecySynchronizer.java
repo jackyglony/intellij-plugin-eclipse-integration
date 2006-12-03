@@ -16,6 +16,7 @@ import com.intellij.openapi.vfs.VirtualFileManager;
 import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseTools;
 import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.RegistrationHelper.Registration;
 import org.jdom.Element;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
@@ -27,8 +28,8 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
 
     // Helpers
     LibraryHelper libraryHelper = new LibraryHelper();
-    ConfigurationHelper configurationHelper = new ConfigurationHelper(this);
-    RegistrationHelper registrationHelper = new RegistrationHelper(this);
+    ConfigurationHelper configurationHelper = new ConfigurationHelper();
+    RegistrationHelper registrationHelper = new RegistrationHelper();
 
     public DependecySynchronizer(Module module) {
         this.module = module;
@@ -63,7 +64,7 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
     }
 
     private void registerLoadedListeners() {
-        for (Map.Entry<String, Registration> e : configurationHelper.loadedListeners.entrySet()) {
+        for (Map.Entry<String, Registration> e : configurationHelper.getLoadedListeners().entrySet()) {
             try {
                 registerListener(
                         VirtualFileManager.getInstance().findFileByUrl(e.getKey())
@@ -93,15 +94,15 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
     }
 
     private Library.ModifiableModel createOrUdateLibrary(VirtualFile classpathVirtualFile, final List<String> libs) {
-        final String classpathFileDir = classpathVirtualFile.getParent().getPath();
-        final Library newLibrary = libraryHelper.getOrCreateLibrary(module
-                , registrationHelper.getRegistration(classpathVirtualFile).libraryName);
+        //noinspection ConstantConditions
+        final String libsBaseDir = classpathVirtualFile.getParent().getPath();
+        final Library newLibrary = libraryHelper.getOrCreateLibrary(module, registrationHelper.getRegistration(classpathVirtualFile).libraryName);
         final Library.ModifiableModel libraryModel = newLibrary.getModifiableModel();
 
         getApplication().runWriteAction(new Runnable() {
             public void run() {
-                libraryHelper.repopulateLibraryWithLibs(libraryModel, classpathFileDir, libs);
-                libraryHelper.addLibraryDependencyToModuleIfNotDependantAlready(module, newLibrary);
+                libraryHelper.repopulateLibraryWithJars(libraryModel, libsBaseDir, libs);
+                libraryHelper.makeModuleDependentOnLibrary(module, newLibrary);
             }
         });
         return libraryModel;
@@ -116,9 +117,10 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
     }
 
     public void writeExternal(Element element) throws WriteExternalException {
-        configurationHelper.writeExternal(element);
+        configurationHelper.writeExternal(element, registrationHelper.getActiveListeners());
     }
 
+    @NotNull
     public String getComponentName() {
         return "DependecySynchronizer";
     }
