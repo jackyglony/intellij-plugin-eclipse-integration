@@ -9,12 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 class RegistrationHelper {
-    Map<String, Registration> activeListeners = new HashMap<String, Registration>();
-    private DependecySynchronizer dependecySynchronizer;
+    private Map<String, Registration> activeListeners = new HashMap<String, Registration>();
 
-    public RegistrationHelper(DependecySynchronizer dependecySynchronizer) {
-        this.dependecySynchronizer = dependecySynchronizer;
-    }
 
     public void unregisterAllListeners() {
         for (RegistrationHelper.Registration r : activeListeners.values())
@@ -59,5 +55,10 @@ class RegistrationHelper {
 
     public boolean isFileRegistered(VirtualFile file) {
         return activeListeners.containsKey(file.getUrl());
+    }
+
+
+    public Map<String, Registration> getActiveListeners() {
+        return activeListeners;
     }
 }
