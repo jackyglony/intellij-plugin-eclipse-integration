@@ -8,12 +8,12 @@ import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependecySy
 import java.util.HashMap;
 import java.util.Map;
 
-class RegistrationHelper {
+class Registry {
     private Map<String, Registration> activeListeners = new HashMap<String, Registration>();
 
 
     public void unregisterAllListeners() {
-        for (RegistrationHelper.Registration r : activeListeners.values())
+        for (Registry.Registration r : activeListeners.values())
             getVirtualFileManager().removeVirtualFileListener(r.listener);
     }
 
@@ -28,11 +28,8 @@ class RegistrationHelper {
     }
 
     static class Registration {
-
         public ClasspathFileModificationListener listener;
-
         public String moduleName;
-
         public String libraryName;
 
         public Registration(ClasspathFileModificationListener listener, String moduleName, String libraryName) {

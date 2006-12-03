@@ -5,18 +5,18 @@ import org.jdom.Element;
 import java.util.HashMap;
 import java.util.Map;
 
-class ConfigurationHelper {
-    private Map<String, RegistrationHelper.Registration> loadedListeners = new HashMap<String, RegistrationHelper.Registration>();
+class Configuration {
+    private Map<String, Registry.Registration> loadedListeners = new HashMap<String, Registry.Registration>();
 
 
     void readExternal(Element element) {
         for (Object o : element.getChildren()) {
             Element e = (Element) o;
-            getLoadedListeners().put(e.getAttributeValue("tracedFile"), new RegistrationHelper.Registration(null, e.getAttributeValue("module"), e.getAttributeValue("library")));
+            getLoadedListeners().put(e.getAttributeValue("tracedFile"), new Registry.Registration(null, e.getAttributeValue("module"), e.getAttributeValue("library")));
         }
     }
 
-    public void writeExternal(Element element, Map<String, RegistrationHelper.Registration> activeListeners) {
+    public void writeExternal(Element element, Map<String, Registry.Registration> activeListeners) {
         for (String url : activeListeners.keySet()) {
             Element element1 = new Element("eclipse-dependency");
             element1.setAttribute("tracedFile", url);
@@ -26,7 +26,7 @@ class ConfigurationHelper {
         }
     }
 
-    Map<String, RegistrationHelper.Registration> getLoadedListeners() {
+    Map<String, Registry.Registration> getLoadedListeners() {
         return loadedListeners;
     }
 }

@@ -5,7 +5,6 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleComponent;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.libraries.Library;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.JDOMExternalizable;
 import com.intellij.openapi.util.WriteExternalException;
@@ -14,7 +13,7 @@ import com.intellij.openapi.vfs.VirtualFileAdapter;
 import com.intellij.openapi.vfs.VirtualFileEvent;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseTools;
-import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.RegistrationHelper.Registration;
+import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.Registry.Registration;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,8 +27,9 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
 
     // Helpers
     LibraryHelper libraryHelper = new LibraryHelper();
-    ConfigurationHelper configurationHelper = new ConfigurationHelper();
-    RegistrationHelper registrationHelper = new RegistrationHelper();
+    Configuration configuration = new Configuration();
+    Registry registry = new Registry();
+    UI ui = new UI();
 
     public DependecySynchronizer(Module module) {
         this.module = module;
@@ -40,31 +40,31 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
     }
 
     public void projectClosed() {
-        registrationHelper.unregisterAllListeners();
+        registry.unregisterAllListeners();
     }
 
     public void stopTracingChanges(final Module currentModule, VirtualFile file) {
-        Registration registration = registrationHelper.unregisterFileSystemListener(file);
+        Registration registration = registry.unregisterFileSystemListener(file);
         libraryHelper.removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(currentModule, registration.libraryName);
     }
 
     public void traceChanges(Module currentModule, VirtualFile classpathVirtualFile) {
         if (currentModule == null) {
-            Messages.showWarningDialog("Please open any project.", "No open projects");
+            ui.displayNoProjectSelectedWarnning();
             return;
         }
 
-        String libraryName = Messages.showInputDialog(currentModule.getProject(), "Please enter library name.", "Creating library for Eclipse dependencies", Messages.getQuestionIcon(), computeEclipseDependenciesLibraryDefaultName(currentModule), null);
+        String libraryName = ui.getLibraryNameFromUser(currentModule.getProject(), computeEclipseDependenciesLibraryDefaultName(currentModule));
         if (libraryName != null) {
             registerListener(classpathVirtualFile, currentModule, libraryName);
 
             Library.ModifiableModel model = refreshEclipseDependencies(classpathVirtualFile);
-            displayInformationDialog(model.getUrls(OrderRootType.CLASSES));
+            ui.displayInformationDialog(model.getUrls(OrderRootType.CLASSES));
         }
     }
 
     private void registerLoadedListeners() {
-        for (Map.Entry<String, Registration> e : configurationHelper.getLoadedListeners().entrySet()) {
+        for (Map.Entry<String, Registration> e : configuration.getLoadedListeners().entrySet()) {
             try {
                 registerListener(
                         VirtualFileManager.getInstance().findFileByUrl(e.getKey())
@@ -76,17 +76,9 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
     }
 
     private void registerListener(VirtualFile classpathVirtualFile, Module currentModule, String libraryName) {
-        registrationHelper.registerClasspathFileModificationListener(classpathVirtualFile, libraryName, new ClasspathFileModificationListener(classpathVirtualFile), currentModule);
+        registry.registerClasspathFileModificationListener(classpathVirtualFile, libraryName, new ClasspathFileModificationListener(classpathVirtualFile), currentModule);
     }
 
-    void displayInformationDialog(String[] urls) {
-        String res = "";
-        for (String url : urls) {
-            res += url + "\n";
-        }
-        Messages.showMessageDialog(
-                "Added the following libs:\n" + res, "Eclipse Dependencies Update", Messages.getInformationIcon());
-    }
 
     Library.ModifiableModel refreshEclipseDependencies(VirtualFile classpathVirtualFile) {
         List<String> libs = EclipseTools.extractJarsFromEclipseDotClasspathFile(classpathVirtualFile.getPath());
@@ -96,7 +88,7 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
     private Library.ModifiableModel createOrUdateLibrary(VirtualFile classpathVirtualFile, final List<String> libs) {
         //noinspection ConstantConditions
         final String libsBaseDir = classpathVirtualFile.getParent().getPath();
-        final Library newLibrary = libraryHelper.getOrCreateLibrary(module, registrationHelper.getRegistration(classpathVirtualFile).libraryName);
+        final Library newLibrary = libraryHelper.getOrCreateLibrary(module, registry.getRegistration(classpathVirtualFile).libraryName);
         final Library.ModifiableModel libraryModel = newLibrary.getModifiableModel();
 
         getApplication().runWriteAction(new Runnable() {
@@ -113,11 +105,11 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
     }
 
     public void readExternal(Element element) throws InvalidDataException {
-        configurationHelper.readExternal(element);
+        configuration.readExternal(element);
     }
 
     public void writeExternal(Element element) throws WriteExternalException {
-        configurationHelper.writeExternal(element, registrationHelper.getActiveListeners());
+        configuration.writeExternal(element, registry.getActiveListeners());
     }
 
     @NotNull
@@ -138,7 +130,7 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
     }
 
     public boolean isFileTraced(VirtualFile file) {
-        return registrationHelper.isFileRegistered(file);
+        return registry.isFileRegistered(file);
     }
 
     class ClasspathFileModificationListener extends VirtualFileAdapter {
@@ -152,7 +144,7 @@ public class DependecySynchronizer implements ModuleComponent, JDOMExternalizabl
         public void contentsChanged(VirtualFileEvent event) {
             if (classpathVirtualFile.getPath().equals(event.getFile().getPath())) {
                 Library.ModifiableModel dependencyLibraryModel = refreshEclipseDependencies(classpathVirtualFile);
-                displayInformationDialog(dependencyLibraryModel.getUrls(OrderRootType.CLASSES));
+                ui.displayInformationDialog(dependencyLibraryModel.getUrls(OrderRootType.CLASSES));
             }
         }
 

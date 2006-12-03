@@ -1,8 +1,8 @@
 <!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
 <idea-plugin>
     <name>Eclipse Dependency Sync</name>
-    <description>This plugin keeps in sync a IntelliJ project classpath when Eclipse .classpath file changes. It might
-        be useful for developers using IntelliJ in a team in which the main IDE is Eclipse.
+    <description>This plugin keeps IntelliJ project classpath in sync with Eclipse .classpath file. It might
+        be useful for developers using IntelliJ in a team, in which the main IDE is Eclipse.
     </description>
     <version>0.9</version>
     <vendor>Piotr Gabryanczyk</vendor>
