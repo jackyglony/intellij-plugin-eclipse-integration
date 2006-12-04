@@ -5,7 +5,9 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataConstants;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependecySynchronizer;
+import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizer;
+import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizerImpl;
+
 
 public class RefreshEclipseDependenciesAction extends AnAction {
 
@@ -19,7 +21,7 @@ public class RefreshEclipseDependenciesAction extends AnAction {
         if (file.getName().equalsIgnoreCase(".classpath")) {
             e.getPresentation().setVisible(true);
 
-            DependecySynchronizer synchronizer = getDependencySynchronizer(e);
+            DependencySynchronizer synchronizer = getDependencySynchronizer(e);
             assert synchronizer != null;
 
             if (synchronizer.isFileTraced(file)) {
@@ -31,7 +33,7 @@ public class RefreshEclipseDependenciesAction extends AnAction {
     }
 
     public void actionPerformed(AnActionEvent e) {
-        DependecySynchronizer synchronizer = getDependencySynchronizer(e);
+        DependencySynchronizer synchronizer = getDependencySynchronizer(e);
         VirtualFile file = getVirtualFile(e);
 
         assert file != null;
@@ -51,7 +53,7 @@ public class RefreshEclipseDependenciesAction extends AnAction {
         return (Module) e.getDataContext().getData(DataConstants.MODULE);
     }
 
-    protected DependecySynchronizer getDependencySynchronizer(AnActionEvent e) {
-        return getModule(e).getComponent(DependecySynchronizer.class);
+    protected DependencySynchronizer getDependencySynchronizer(AnActionEvent e) {
+        return getModule(e).getComponent(DependencySynchronizerImpl.class);
     }
 }

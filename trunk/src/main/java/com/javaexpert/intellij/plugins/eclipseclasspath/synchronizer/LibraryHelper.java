@@ -14,15 +14,20 @@ import com.intellij.openapi.util.Computable;
 import java.util.List;
 
 class LibraryHelper {
+    private Module module;
 
-    public void removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(final Module currentModule, String libraryName) {
-        final Library eclipseDepsLibrary = getLibraryTable(currentModule).getLibraryByName(libraryName);
+    public LibraryHelper(Module module) {
+        this.module = module;
+    }
+
+    public void removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(String libraryName) {
+        final Library eclipseDepsLibrary = getLibraryTable(module).getLibraryByName(libraryName);
 
         if (eclipseDepsLibrary != null) {
             ApplicationManager.getApplication().runWriteAction(new Runnable() {
                 public void run() {
-                    removeDependencyBetweenModuleAndLibrary(getModuleRootManager(currentModule).getModifiableModel(), eclipseDepsLibrary);
-                    deleteLibrary(getLibraryTable(currentModule), eclipseDepsLibrary);
+                    removeDependencyBetweenModuleAndLibrary(getModuleRootManager(module).getModifiableModel(), eclipseDepsLibrary);
+                    deleteLibrary(getLibraryTable(module), eclipseDepsLibrary);
                 }
             });
         }
@@ -32,11 +37,11 @@ class LibraryHelper {
         moduleLibraryTable.removeLibrary(eclipseDepsLibrary);
     }
 
-    LibraryTable getLibraryTable(Module currentModule) {
+    static LibraryTable getLibraryTable(Module currentModule) {
         return LibraryTablesRegistrar.getInstance().getLibraryTable(currentModule.getProject());
     }
 
-    ModuleRootManager getModuleRootManager(Module currentModule) {
+    static ModuleRootManager getModuleRootManager(Module currentModule) {
         return ModuleRootManager.getInstance(currentModule);
     }
 
@@ -46,7 +51,7 @@ class LibraryHelper {
         }
     }
 
-    void addJarsToLibrary(String baseDirectory, List<String> jars, Library.ModifiableModel model) {
+    void addJarsToLibrary(Library.ModifiableModel model, List<String> jars, String baseDirectory) {
         for (String jar : jars) {
             if (isAbsoulutePathOrUrl(jar)) {
                 model.addRoot("jar://" + jar + "!/", OrderRootType.CLASSES);
@@ -60,14 +65,6 @@ class LibraryHelper {
         return lib.matches("[a-zA-Z]:[/\\\\].+") || lib.startsWith("/");
     }
 
-    public void makeModuleDependentOnLibrary(Module module, Library newLibrary) {
-        ModifiableRootModel moduleModel = getModuleRootManager(module).getModifiableModel();
-        if (moduleModel.findLibraryOrderEntry(newLibrary) == null) {
-            moduleModel.addLibraryEntry(newLibrary);
-            moduleModel.commit();
-        }
-    }
-
     public void removeDependencyBetweenModuleAndLibrary(ModifiableRootModel moduleModel, Library library) {
         LibraryOrderEntry libraryReference = moduleModel.findLibraryOrderEntry(library);
         if (libraryReference != null) {
@@ -76,29 +73,50 @@ class LibraryHelper {
         }
     }
 
-    public Library getOrCreateLibrary(Module currentModule, final String libraryName) {
-        final LibraryTable libraryTable = getLibraryTable(currentModule);
-        Library res = libraryTable.getLibraryByName(libraryName);
-
-        if (res == null) {
-            res = createLibrary(libraryTable, libraryName);
-        }
-        return res;
-    }
-
-    public Library createLibrary(final LibraryTable libraryTable, final String libraryName) {
+    public Library createLibrary(final String libraryName, final Module currentModule) {
         Library res;
         res = ApplicationManager.getApplication().runWriteAction(new Computable<Library>() {
             public Library compute() {
-                return libraryTable.createLibrary(libraryName);
+                return getLibraryTable(currentModule).createLibrary(libraryName);
             }
         });
         return res;
     }
 
-    void repopulateLibraryWithJars(Library.ModifiableModel libraryModel, String libsBaseDir, List<String> libs) {
-        clearLibrary(libraryModel);
-        addJarsToLibrary(libsBaseDir, libs, libraryModel);
-        libraryModel.commit();
+    public Library getLibraryByName(String libraryName) {
+        return getLibraryTable(module).getLibraryByName(libraryName);
+    }
+
+    void makeModuleDependentOnLibrary(final Library lib) {
+        ApplicationManager.getApplication().runWriteAction(new Runnable() {
+            public void run() {
+                ModifiableRootModel moduleModel = getModuleRootManager(module).getModifiableModel();
+                if (moduleModel.findLibraryOrderEntry(lib) == null) {
+                    moduleModel.addLibraryEntry(lib);
+                    moduleModel.commit();
+                }
+            }
+        });
+    }
+
+    void repopulateLibraryContent(final Library newLibrary, final List<String> libs, final String libsBaseDir) {
+        //noinspection ConstantConditions
+        final Library.ModifiableModel libraryModel = newLibrary.getModifiableModel();
+
+        ApplicationManager.getApplication().runWriteAction(new Runnable() {
+            public void run() {
+                clearLibrary(libraryModel);
+                addJarsToLibrary(libraryModel, libs, libsBaseDir);
+                libraryModel.commit();
+            }
+        });
+    }
+
+    Library getOrCreateLibrary(String libraryName) {
+        Library lib = getLibraryByName(libraryName);
+        if (lib == null) {
+            lib = createLibrary(libraryName, module);
+        }
+        return lib;
     }
 }

@@ -8,7 +8,7 @@ import com.intellij.openapi.ui.Messages;
  * Date: 2006-12-03
  * Time: 10:08:29
  */
-public class UI {
+class UI {
     void displayInformationDialog(String[] urls) {
         String res = "";
         for (String url : urls) {

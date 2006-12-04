@@ -8,7 +8,8 @@
     <idea-version since-build="5581"/>
     <module-components>
         <component>
-            <implementation-class>com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependecySynchronizer
+            <implementation-class>
+                com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizerImpl
             </implementation-class>
         </component>
     </module-components>

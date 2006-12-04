@@ -3,7 +3,7 @@ package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependecySynchronizer.ClasspathFileModificationListener;
+import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizerImpl.ClasspathFileModificationListener;
 
 import java.util.HashMap;
 import java.util.Map;
