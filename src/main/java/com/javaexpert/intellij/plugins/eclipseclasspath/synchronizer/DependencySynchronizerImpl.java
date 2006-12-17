@@ -22,14 +22,15 @@ import java.util.Map;
 public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternalizable, DependencySynchronizer {
     private static final String ECLIPSE_DEPENDENCIES_SUFFIX = "-eclipse_dependencies";
 
-    Module module;
-    LibraryHelper libraryHelper;
-    Configuration configuration;
-    Registry registry;
-    UI ui;
+    private Module module;
+    private LibraryHelper libraryHelper;
+    private Configuration configuration;
+    private Registry registry;
+    private UI ui;
+    private EclipseTools eclipseTools;
 
     public DependencySynchronizerImpl(Module module) {
-        this.module = module;
+        this.setModule(module);
     }
 
     public void projectOpened() {
@@ -46,28 +47,30 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
     }
 
     public void initComponent() {
-        libraryHelper = new LibraryHelper(module);
-        configuration = new Configuration();
-        registry = new Registry();
-        ui = new UI();
+        setLibraryHelper(new LibraryHelper(module));
+        setConfiguration(new Configuration());
+        setRegistry(new Registry());
+        setUi(new UI());
+        setEclipseTools(new EclipseTools());
     }
 
-    public void stopTracingChanges(final Module currentModule, VirtualFile file) {
-        Registration registration = registry.unregisterFileSystemListener(file);
-        libraryHelper.removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(registration.libraryName);
+    public void stopTracingChanges(VirtualFile file) {
+        String libraryName = registry.getLibraryName(file);
+        registry.unregisterFileSystemListener(file);
+        libraryHelper.removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(libraryName);
     }
 
-    public void traceChanges(Module currentModule, VirtualFile classpathVirtualFile) {
-        if (currentModule == null) {
+    public void traceChanges(VirtualFile classpathVirtualFile) {
+        if (module == null) {
             ui.displayNoProjectSelectedWarnning();
             return;
         }
 
-        String libraryName = ui.getLibraryNameFromUser(currentModule.getProject(), computeEclipseDependenciesLibraryDefaultName(currentModule));
-        if (libraryName != null) {
-            registerListener(classpathVirtualFile, currentModule, libraryName);
-            detectedClasspathChanges(classpathVirtualFile);
-        }
+        String libraryName = ui.getLibraryNameFromUser(module.getProject(), computeEclipseDependenciesLibraryDefaultName(module));
+        if (libraryName == null) return;
+
+        registerListener(classpathVirtualFile, module, libraryName);
+        detectedClasspathChanges(classpathVirtualFile);
     }
 
     public boolean isFileTraced(VirtualFile file) {
@@ -87,20 +90,13 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
     }
 
     private void registerListener(VirtualFile classpathVirtualFile, Module currentModule, String libraryName) {
-        registry.registerClasspathFileModificationListener(classpathVirtualFile, libraryName, new ClasspathFileModificationListener(classpathVirtualFile), currentModule);
+        registry.registerClasspathFileModificationListener(classpathVirtualFile, libraryName, new ClasspathFileModificationListener(classpathVirtualFile), currentModule.getName());
     }
 
 
     private Library syncDependencies(VirtualFile classpathVirtualFile) {
-        List<String> jars = EclipseTools.extractJarsFromEclipseDotClasspathFile(classpathVirtualFile.getPath());
-        Library lib = libraryHelper.getOrCreateLibrary(getLibraryName(classpathVirtualFile));
-        libraryHelper.repopulateLibraryContent(lib, jars, classpathVirtualFile.getParent().getPath());
-        libraryHelper.makeModuleDependentOnLibrary(lib);
-        return lib;
-    }
-
-    private String getLibraryName(VirtualFile classpathVirtualFile) {
-        return registry.getRegistration(classpathVirtualFile).libraryName;
+        List<String> jars = eclipseTools.extractJarsFromEclipseDotClasspathFile(classpathVirtualFile.getPath());
+        return libraryHelper.createOrRefreshLibraryWithJars(jars, registry.getLibraryName(classpathVirtualFile), classpathVirtualFile.getParent().getPath());
     }
 
     private String computeEclipseDependenciesLibraryDefaultName(Module currentModule) {
@@ -112,7 +108,7 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
     }
 
     public void writeExternal(Element element) throws WriteExternalException {
-        configuration.writeExternal(element, registry.getActiveListeners());
+        configuration.writeExternal(element, registry.getRegistrations());
     }
 
     public void disposeComponent() {
@@ -128,7 +124,31 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
         ui.displayInformationDialog(library.getUrls(OrderRootType.CLASSES));
     }
 
-    class ClasspathFileModificationListener extends VirtualFileAdapter {
+    protected void setModule(Module module) {
+        this.module = module;
+    }
+
+    protected void setLibraryHelper(LibraryHelper libraryHelper) {
+        this.libraryHelper = libraryHelper;
+    }
+
+    protected void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
+    }
+
+    protected void setRegistry(Registry registry) {
+        this.registry = registry;
+    }
+
+    protected void setUi(UI ui) {
+        this.ui = ui;
+    }
+
+    protected void setEclipseTools(EclipseTools eclipseTools) {
+        this.eclipseTools = eclipseTools;
+    }
+
+    private class ClasspathFileModificationListener extends VirtualFileAdapter {
         private final VirtualFile classpathVirtualFile;
 
         public ClasspathFileModificationListener(VirtualFile classpathVirtualFile) {

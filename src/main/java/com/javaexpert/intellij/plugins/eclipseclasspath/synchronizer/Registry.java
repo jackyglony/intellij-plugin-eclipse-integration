@@ -1,6 +1,5 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizerImpl.ClasspathFileModificationListener;
@@ -9,25 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 class Registry {
-    private Map<String, Registration> activeListeners = new HashMap<String, Registration>();
-
-
-    public void unregisterAllListeners() {
-        for (Registry.Registration r : activeListeners.values())
-            getVirtualFileManager().removeVirtualFileListener(r.listener);
-    }
-
-    Registration unregisterFileSystemListener(VirtualFile file) {
-        Registration registration = activeListeners.remove(file.getUrl());
-        getVirtualFileManager().removeVirtualFileListener(registration.listener);
-        return registration;
-    }
-
-    Registration getRegistration(VirtualFile classpathVirtualFile) {
-        return activeListeners.get(classpathVirtualFile.getUrl());
-    }
-
-    static class Registration {
+    protected static class Registration {
         public ClasspathFileModificationListener listener;
         public String moduleName;
         public String libraryName;
@@ -39,23 +20,42 @@ class Registry {
         }
     }
 
-    void registerClasspathFileModificationListener(VirtualFile classpathVirtualFile, String libraryName, ClasspathFileModificationListener listener, Module currentModule) {
+    private Map<String, Registration> registrations = new HashMap<String, Registration>();
+
+    public void unregisterAllListeners() {
+        for (Registry.Registration r : registrations.values())
+            getVirtualFileManager().removeVirtualFileListener(r.listener);
+    }
+
+    public void unregisterFileSystemListener(VirtualFile file) {
+        Registration registration = registrations.remove(file.getUrl());
+        getVirtualFileManager().removeVirtualFileListener(registration.listener);
+    }
+
+    protected Registration getRegistration(VirtualFile classpathVirtualFile) {
+        return registrations.get(classpathVirtualFile.getUrl());
+    }
+
+    public String getLibraryName(VirtualFile classpathVirtualFile) {
+        return getRegistration(classpathVirtualFile).libraryName;
+    }
+
+    public void registerClasspathFileModificationListener(VirtualFile classpathVirtualFile, String libraryName, ClasspathFileModificationListener listener, String moduleName) {
         if (!isFileRegistered(classpathVirtualFile)) {
             getVirtualFileManager().addVirtualFileListener(listener);
-            activeListeners.put(classpathVirtualFile.getUrl(), new Registration(listener, currentModule.getName(), libraryName));
+            registrations.put(classpathVirtualFile.getUrl(), new Registration(listener, moduleName, libraryName));
         }
     }
 
-    VirtualFileManager getVirtualFileManager() {
+    protected VirtualFileManager getVirtualFileManager() {
         return VirtualFileManager.getInstance();
     }
 
     public boolean isFileRegistered(VirtualFile file) {
-        return activeListeners.containsKey(file.getUrl());
+        return registrations.containsKey(file.getUrl());
     }
 
-
-    public Map<String, Registration> getActiveListeners() {
-        return activeListeners;
+    public Map<String, Registration> getRegistrations() {
+        return registrations;
     }
 }

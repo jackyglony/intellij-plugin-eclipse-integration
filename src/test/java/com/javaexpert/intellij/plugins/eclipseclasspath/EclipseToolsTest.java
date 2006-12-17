@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class EclipseToolsTest extends TestCase {
     public void testPersesEclipseClasspath() {
-        List<String> res = EclipseTools.extractJarsFromEclipseDotClasspathFile(this.getClass().getResource(".classpath").getPath());
+        List<String> res = new EclipseTools().extractJarsFromEclipseDotClasspathFile(this.getClass().getResource(".classpath").getPath());
         assertEquals(res.size(), 10);
         assertTrue(res.contains("lib/cglib-nodep-2.1_3.jar"));
         assertTrue(!res.contains("uimocks"));

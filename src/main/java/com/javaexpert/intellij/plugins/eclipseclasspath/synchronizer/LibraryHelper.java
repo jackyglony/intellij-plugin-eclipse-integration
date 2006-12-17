@@ -16,6 +16,10 @@ import java.util.List;
 class LibraryHelper {
     private Module module;
 
+
+    LibraryHelper() {
+    }
+
     public LibraryHelper(Module module) {
         this.module = module;
     }
@@ -53,19 +57,20 @@ class LibraryHelper {
 
     void addJarsToLibrary(Library.ModifiableModel model, List<String> jars, String baseDirectory) {
         for (String jar : jars) {
-            if (isAbsoulutePathOrUrl(jar)) {
-                model.addRoot("jar://" + jar + "!/", OrderRootType.CLASSES);
-            } else {
-                model.addRoot("jar://" + baseDirectory + "/" + jar + "!/", OrderRootType.CLASSES);
-            }
+            model.addRoot(convertJarPathToIntelliJLibraryUrl(jar, baseDirectory), OrderRootType.CLASSES);
         }
+    }
+
+    private String convertJarPathToIntelliJLibraryUrl(String jarPath, String baseDirectory) {
+        if (isAbsoulutePathOrUrl(jarPath)) return String.format("jar://%s!/", jarPath);
+        return String.format("jar://%s/%s!/", baseDirectory, jarPath);
     }
 
     boolean isAbsoulutePathOrUrl(String lib) {
         return lib.matches("[a-zA-Z]:[/\\\\].+") || lib.startsWith("/");
     }
 
-    public void removeDependencyBetweenModuleAndLibrary(ModifiableRootModel moduleModel, Library library) {
+    private void removeDependencyBetweenModuleAndLibrary(ModifiableRootModel moduleModel, Library library) {
         LibraryOrderEntry libraryReference = moduleModel.findLibraryOrderEntry(library);
         if (libraryReference != null) {
             moduleModel.removeOrderEntry(libraryReference);
@@ -117,6 +122,13 @@ class LibraryHelper {
         if (lib == null) {
             lib = createLibrary(libraryName, module);
         }
+        return lib;
+    }
+
+    public Library createOrRefreshLibraryWithJars(List<String> jars, String libraryName, String jarsBasePath) {
+        Library lib = getOrCreateLibrary(libraryName);
+        repopulateLibraryContent(lib, jars, jarsBasePath);
+        makeModuleDependentOnLibrary(lib);
         return lib;
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EclipseTools {
-    public static List<String> extractJarsFromEclipseDotClasspathFile(String filename) {
+    public List<String> extractJarsFromEclipseDotClasspathFile(String filename) {
         Document document = XmlTools.parseXmlFile(filename, false);
 
         NodeList list = document.getDocumentElement().getChildNodes();

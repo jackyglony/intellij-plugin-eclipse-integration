@@ -9,7 +9,7 @@ import com.intellij.openapi.ui.Messages;
  * Time: 10:08:29
  */
 class UI {
-    void displayInformationDialog(String[] urls) {
+    public void displayInformationDialog(String[] urls) {
         String res = "";
         for (String url : urls) {
             res += url + "\n";
@@ -18,11 +18,11 @@ class UI {
                 "Added the following libs:\n" + res, "Eclipse Dependencies Update", Messages.getInformationIcon());
     }
 
-    void displayNoProjectSelectedWarnning() {
+    public void displayNoProjectSelectedWarnning() {
         Messages.showWarningDialog("Please open any project.", "No open projects");
     }
 
-    String getLibraryNameFromUser(Project project, String defaultLibraryName) {
+    public String getLibraryNameFromUser(Project project, String defaultLibraryName) {
         return Messages.showInputDialog(project, "Please enter library name.", "Creating library for Eclipse dependencies", Messages.getQuestionIcon(), defaultLibraryName, null);
     }
 }
