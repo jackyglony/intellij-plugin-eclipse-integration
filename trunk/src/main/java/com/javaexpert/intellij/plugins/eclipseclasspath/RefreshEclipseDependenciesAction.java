@@ -39,9 +39,9 @@ public class RefreshEclipseDependenciesAction extends AnAction {
         assert file != null;
 
         if (synchronizer.isFileTraced(file)) {
-            synchronizer.stopTracingChanges(getModule(e), file);
+            synchronizer.stopTracingChanges(file);
         } else {
-            synchronizer.traceChanges(getModule(e), file);
+            synchronizer.traceChanges(file);
         }
     }
 
