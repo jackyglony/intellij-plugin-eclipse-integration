@@ -1,6 +1,5 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizerImpl.ClasspathFileModificationListener;
 
@@ -27,23 +26,23 @@ class Registry {
             getVirtualFileManager().removeVirtualFileListener(r.listener);
     }
 
-    public void unregisterFileSystemListener(VirtualFile file) {
-        Registration registration = registrations.remove(file.getUrl());
+    public void unregisterFileSystemListener(String fileName) {
+        Registration registration = registrations.remove(fileName);
         getVirtualFileManager().removeVirtualFileListener(registration.listener);
     }
 
-    protected Registration getRegistration(VirtualFile classpathVirtualFile) {
-        return registrations.get(classpathVirtualFile.getUrl());
+    protected Registration getRegistration(String fileName) {
+        return registrations.get(fileName);
     }
 
-    public String getLibraryName(VirtualFile classpathVirtualFile) {
-        return getRegistration(classpathVirtualFile).libraryName;
+    public String getLibraryName(String fileName) {
+        return getRegistration(fileName).libraryName;
     }
 
-    public void registerClasspathFileModificationListener(VirtualFile classpathVirtualFile, String libraryName, ClasspathFileModificationListener listener, String moduleName) {
-        if (!isFileRegistered(classpathVirtualFile)) {
+    public void registerClasspathFileModificationListener(String libraryName, ClasspathFileModificationListener listener, String moduleName, String fileName) {
+        if (!isFileRegistered(fileName)) {
             getVirtualFileManager().addVirtualFileListener(listener);
-            registrations.put(classpathVirtualFile.getUrl(), new Registration(listener, moduleName, libraryName));
+            registrations.put(fileName, new Registration(listener, moduleName, libraryName));
         }
     }
 
@@ -51,8 +50,8 @@ class Registry {
         return VirtualFileManager.getInstance();
     }
 
-    public boolean isFileRegistered(VirtualFile file) {
-        return registrations.containsKey(file.getUrl());
+    public boolean isFileRegistered(String fileName) {
+        return registrations.containsKey(fileName);
     }
 
     public Map<String, Registration> getRegistrations() {

@@ -24,7 +24,7 @@ public class RefreshEclipseDependenciesAction extends AnAction {
             DependencySynchronizer synchronizer = getDependencySynchronizer(e);
             assert synchronizer != null;
 
-            if (synchronizer.isFileTraced(file)) {
+            if (synchronizer.isFileTraced(file.getPath())) {
                 e.getPresentation().setText("Remove ECLIPSE dependency");
             } else {
                 e.getPresentation().setText("Add ECLIPSE dependency");
@@ -38,10 +38,10 @@ public class RefreshEclipseDependenciesAction extends AnAction {
 
         assert file != null;
 
-        if (synchronizer.isFileTraced(file)) {
-            synchronizer.stopTracingChanges(file);
+        if (synchronizer.isFileTraced(file.getPath())) {
+            synchronizer.stopTracingChanges(file.getPath());
         } else {
-            synchronizer.traceChanges(file);
+            synchronizer.traceChanges(new EclipseClasspathFile(file.getPath()));
         }
     }
 

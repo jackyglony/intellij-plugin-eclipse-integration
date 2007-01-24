@@ -5,12 +5,25 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EclipseTools {
-    public List<String> extractJarsFromEclipseDotClasspathFile(String filename) {
-        Document document = XmlTools.parseXmlFile(filename, false);
+public class EclipseClasspathFile {
+    private String fileName;
+
+
+    public EclipseClasspathFile(String filename) {
+        this.fileName = filename;
+    }
+
+
+    EclipseClasspathFile() {
+    }
+
+    public List<String> getJars() {
+        Document document = parseClasspathFile();
 
         NodeList list = document.getDocumentElement().getChildNodes();
         List<String> libs = new ArrayList<String>();
@@ -27,5 +40,26 @@ public class EclipseTools {
             }
         }
         return libs;
+    }
+
+    protected Document parseClasspathFile() {
+        return XmlTools.parseXmlFile(fileName, false);
+    }
+
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public String getDir() {
+        return new File(fileName).getParent();
+    }
+
+    public boolean hasPath(String path) {
+        try {
+            return new File(fileName).getCanonicalPath().equalsIgnoreCase(new File(path).getCanonicalPath());
+        } catch (IOException e) {
+            throw new RuntimeException("Problem comparing paths " + fileName + " and " + path);
+        }
     }
 }
