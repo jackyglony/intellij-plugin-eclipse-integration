@@ -2,8 +2,7 @@ package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.libraries.Library;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseTools;
+import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathFile;
 import net.sf.jdummy.JDummyTestCase;
 import org.jmock.Mock;
 import org.junit.Before;
@@ -20,11 +19,10 @@ import java.util.List;
  */
 public class DependencySynchronizerTest extends JDummyTestCase {
     private DependencySynchronizer dependencySynchronizer;
-    private Module module;
-    private VirtualFile file;
     private Mock libraryHelper;
     private Mock ui;
-    private Mock eclipseTools;
+    private Mock fileMock;
+    private EclipseClasspathFile file;
     private Mock registry;
 
     @Before
@@ -32,17 +30,15 @@ public class DependencySynchronizerTest extends JDummyTestCase {
         DependencySynchronizerImpl ds;
 
         super.setUp();
-        module = (Module) mimicWithDummyValues(Module.class);
-        file = (VirtualFile) mimicWithDummyValues(VirtualFile.class);
+        Module module = (Module) mimicWithDummyValues(Module.class);
         libraryHelper = mock(LibraryHelper.class);
         ui = mock(UI.class);
         registry = mock(Registry.class);
-        eclipseTools = mock(EclipseTools.class);
+        fileMock = mock(EclipseClasspathFile.class);
 
         ds = new DependencySynchronizerImpl(module);
         ds.setLibraryHelper((LibraryHelper) libraryHelper.proxy());
         ds.setUi((UI) ui.proxy());
-        ds.setEclipseTools((EclipseTools) eclipseTools.proxy());
         ds.setRegistry((Registry) registry.proxy());
         dependencySynchronizer = ds;
 
@@ -58,33 +54,59 @@ public class DependencySynchronizerTest extends JDummyTestCase {
     public void testIsFileTraced() {
         expectFullRegistrationToBeDone();
         dependencySynchronizer.traceChanges(file);
-        registry.expects(once()).method("isFileRegistered").with(eq(file)).will(returnValue(true));
-        assertTrue(dependencySynchronizer.isFileTraced(file));
+        registry.expects(once())
+                .method("isFileRegistered")
+                .with(eq(file.getFileName()))
+                .will(returnValue(true));
+        assertTrue(dependencySynchronizer.isFileTraced(file.getFileName()));
     }
 
     @Test
     public void testIsFileTracedWhenNotTraced() {
-        registry.expects(once()).method("isFileRegistered").with(eq(file)).will(returnValue(false));
-        assertFalse(dependencySynchronizer.isFileTraced(file));
+        registry.expects(once())
+                .method("isFileRegistered")
+                .with(eq("fileName"))
+                .will(returnValue(false));
+        assertFalse(dependencySynchronizer.isFileTraced("fileName"));
     }
 
     private void expectFullRegistrationToBeDone() {
         List<String> jars = Collections.EMPTY_LIST;
         String libraryName = "libX";
-        String path = "/some/path";
+        String path = "/some/path/x.yz";
 
-        ui.expects(once()).method("getLibraryNameFromUser").will(returnValue(libraryName));
-        assertBehavior(file).expects(atLeastOnce()).method("getPath").will(returnValue(path));
-        eclipseTools.expects(once()).method("extractJarsFromEclipseDotClasspathFile").with(eq(path)).will(returnValue(jars));
-        registry.expects(once()).method("registerClasspathFileModificationListener").with(eq(file), eq(libraryName), ANYTHING, ANYTHING);
-        registry.stubs().method("getLibraryName").with(eq(file)).will(returnValue(libraryName));
-        libraryHelper.expects(once()).method("createOrRefreshLibraryWithJars").with(eq(jars), eq(libraryName), ANYTHING).will(returnValue(mimicWithDummyValues(Library.class)));
-        ui.expects(once()).method("displayInformationDialog");
+        ui.expects(once())
+                .method("getLibraryNameFromUser")
+                .will(returnValue(libraryName));
+        fileMock.expects(atLeastOnce())
+                .method("getFileName")
+                .will(returnValue(path));
+        fileMock.expects(once())
+                .method("getJars")
+                .will(returnValue(jars));
+        fileMock.expects(once())
+                .method("getDir")
+                .will(returnValue("/some/path"));
+        file = (EclipseClasspathFile) fileMock.proxy();
+        registry.expects(once())
+                .method("registerClasspathFileModificationListener")
+                .with(eq(libraryName), ANYTHING, ANYTHING, eq(path));
+        registry.stubs().method("getLibraryName")
+                .with(eq(path))
+                .will(returnValue(libraryName));
+        libraryHelper.expects(once())
+                .method("createOrRefreshLibraryWithJars")
+                .with(eq(jars), eq(libraryName), ANYTHING)
+                .will(returnValue(mimicWithDummyValues(Library.class)));
+        ui.expects(once())
+                .method("displayInformationDialog");
     }
 
     @Test
     public void testTraceChangesWhenUserCancelsLibraryName() {
-        ui.expects(once()).method("getLibraryNameFromUser").will(returnValue(null));
+        ui.expects(once())
+                .method("getLibraryNameFromUser")
+                .will(returnValue(null));
 
         dependencySynchronizer.traceChanges(file);
     }
@@ -92,9 +114,14 @@ public class DependencySynchronizerTest extends JDummyTestCase {
 
     @Test
     public void testStopTracingChanges() {
-        registry.stubs().method("getLibraryName").will(returnValue("lib"));
-        registry.expects(once()).method("unregisterFileSystemListener");
-        libraryHelper.expects(once()).method("removeDependencyBetweenModuleAndLibraryAndDeleteLibrary").with(eq("lib"));
-        ((DependencySynchronizer) dependencySynchronizer).stopTracingChanges(file);
+        registry.stubs()
+                .method("getLibraryName")
+                .will(returnValue("lib"));
+        registry.expects(once())
+                .method("unregisterFileSystemListener");
+        libraryHelper.expects(once())
+                .method("removeDependencyBetweenModuleAndLibraryAndDeleteLibrary")
+                .with(eq("lib"));
+        dependencySynchronizer.stopTracingChanges("anything");
     }
 }

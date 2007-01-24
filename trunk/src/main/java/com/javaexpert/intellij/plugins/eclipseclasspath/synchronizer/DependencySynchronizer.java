@@ -1,6 +1,6 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
-import com.intellij.openapi.vfs.VirtualFile;
+import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathFile;
 
 /**
  * User: piotrga
@@ -8,9 +8,9 @@ import com.intellij.openapi.vfs.VirtualFile;
  * Time: 21:41:50
  */
 public interface DependencySynchronizer {
-    void stopTracingChanges(VirtualFile file);
+    void stopTracingChanges(String fileName);
 
-    void traceChanges(VirtualFile classpathVirtualFile);
+    void traceChanges(EclipseClasspathFile eclipseClasspathFile);
 
-    boolean isFileTraced(VirtualFile file);
+    boolean isFileTraced(String fileName);
 }
