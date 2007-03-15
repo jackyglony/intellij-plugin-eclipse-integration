@@ -10,6 +10,11 @@ import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
 import com.intellij.openapi.util.Computable;
+import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathEntry;
+import static com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathEntry.Kind.LIB;
+import static com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathEntry.Kind.VAR;
+import com.javaexpert.intellij.plugins.eclipseclasspath.VarEclipseClasspathEntry;
+import org.jmock.util.NotImplementedException;
 
 import java.util.List;
 
@@ -55,19 +60,47 @@ class LibraryHelper {
         }
     }
 
-    void addJarsToLibrary(Library.ModifiableModel model, List<String> jars, String baseDirectory) {
-        for (String jar : jars) {
-            model.addRoot(convertJarPathToIntelliJLibraryUrl(jar, baseDirectory), OrderRootType.CLASSES);
+    void addJarsToLibrary(Library.ModifiableModel model, List<EclipseClasspathEntry> jars, String baseDirectory) {
+        for (EclipseClasspathEntry entry : jars) {
+//            VirtualFile f = VirtualFileManager.getInstance().findFileByUrl(transformToIntelliJLocation(entry, baseDirectory));
+
+            String location = transformToIntelliJLocation(entry, baseDirectory);
+            if (location.toLowerCase().endsWith(".jar")) {
+                model.addRoot("jar://" + location + "!/", OrderRootType.CLASSES);
+            } else {
+                model.addRoot("file://" + location + "!/", OrderRootType.CLASSES);
+            }
+
+            if (entry.sourcePath() != null) model.addRoot(entry.sourcePath(), OrderRootType.SOURCES);
+            if (entry.javadocPath() != null) model.addRoot(entry.javadocPath(), OrderRootType.JAVADOC);
         }
     }
 
-    private String convertJarPathToIntelliJLibraryUrl(String jarPath, String baseDirectory) {
-        if (isAbsoulutePathOrUrl(jarPath)) return String.format("jar://%s!/", jarPath);
-        return String.format("jar://%s/%s!/", baseDirectory, jarPath);
+    private String transformToIntelliJLocation(EclipseClasspathEntry entry, String baseDirectory) {
+        if (entry.kind() == LIB) {
+            if (entry.path().startsWith("/")) return String.format("%s/..%s", baseDirectory, entry.path());
+            if (isUrl(entry.path())) return String.format("%s", entry.path());
+            return String.format("%s/%s", baseDirectory, entry.path());
+        } else if (entry.kind() == VAR) {
+            String var = ((VarEclipseClasspathEntry) entry).variableName();
+            return String.format("%s", entry.path().replaceFirst(var, "\\$" + var + "\\$"));
+        }
+        throw new NotImplementedException("Not implemented entry kind " + entry.kind());
     }
+//    private String transformToIntelliJLocation(EclipseClasspathEntry entry, String baseDirectory) {
+//        if (entry.kind() == LIB) {
+//            if( entry.path().startsWith("/")) return String.format("jar://%s/../%s!/", baseDirectory, entry.path());
+//            if (isUrl(entry.path())) return String.format("jar://%s!/", entry.path());
+//            return String.format("jar://%s/%s!/", baseDirectory, entry.path());
+//        }else if (entry.kind() == VAR){
+//            String var = entry.path().split("/")[0];
+//            return String.format("jar://%s!/", entry.path().replaceFirst(var,"\\$"+var+"\\$"));
+//        }
+//        throw new NotImplementedException("Not implemented entry kind "+entry.kind());
+//    }
 
-    boolean isAbsoulutePathOrUrl(String lib) {
-        return lib.matches("[a-zA-Z]:[/\\\\].+") || lib.startsWith("/");
+    boolean isUrl(String lib) {
+        return lib.matches("[a-zA-Z]+:[/\\\\].+");
     }
 
     private void removeDependencyBetweenModuleAndLibrary(ModifiableRootModel moduleModel, Library library) {
@@ -104,7 +137,7 @@ class LibraryHelper {
         });
     }
 
-    void repopulateLibraryContent(final Library newLibrary, final List<String> libs, final String libsBaseDir) {
+    void repopulateLibraryContent(final Library newLibrary, final List<EclipseClasspathEntry> libs, final String libsBaseDir) {
         //noinspection ConstantConditions
         final Library.ModifiableModel libraryModel = newLibrary.getModifiableModel();
 
@@ -125,7 +158,7 @@ class LibraryHelper {
         return lib;
     }
 
-    public Library createOrRefreshLibraryWithJars(List<String> jars, String libraryName, String jarsBasePath) {
+    public Library createOrRefreshLibraryWithJars(List<EclipseClasspathEntry> jars, String libraryName, String jarsBasePath) {
         Library lib = getOrCreateLibrary(libraryName);
         repopulateLibraryContent(lib, jars, jarsBasePath);
         makeModuleDependentOnLibrary(lib);

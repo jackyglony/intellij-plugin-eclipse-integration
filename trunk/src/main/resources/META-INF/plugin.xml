@@ -2,11 +2,12 @@
 <idea-plugin>
     <name>Eclipse Dependency Sync</name>
     <description>This plugin keeps IntelliJ project classpath in sync with Eclipse .classpath file. It might
-        be useful for developers using IntelliJ in a team, in which the main IDE is Eclipse.
+        be useful for developers using IntelliJ in a team, in which the main IDE is Eclipse. More information at
+        http://code.google.com/p/intellij-plugin-eclipse-integration
     </description>
-    <version>0.9</version>
+    <version>0.9.2</version>
     <vendor>Piotr Gabryanczyk</vendor>
-    <idea-version since-build="5581"/>
+    <idea-version since-build="5000"/>
     <module-components>
         <component>
             <implementation-class>
