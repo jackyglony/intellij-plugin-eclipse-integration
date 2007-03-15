@@ -8,10 +8,12 @@
     <classpathentry exported="true" kind="lib" path="lib/aspectjrt.jar"/>
     <classpathentry exported="true" kind="lib" path="lib/spring.jar"/>
     <classpathentry exported="true" kind="lib" path="lib/cglib-nodep-2.1_3.jar"/>
-    <classpathentry exported="true" kind="lib" path="libs/commons-codec-1.2.jar" />
+    <classpathentry exported="true" kind="lib" path="libs/commons-codec-1.2.jar"/>
     <classpathentry exported="true" kind="lib" path="src/main/libs/commons-AAAA-1.2.jar"/>
-    <classpathentry kind="lib" path="C:/PIOTRGA/Apps/java/ide/eclipse/plugins/org.eclipse.jdt.junit.runtime_3.1.0/junitruntime.jar"/>
-    <classpathentry kind="lib" path="/PIOTRGA/Apps/java/ide/eclipse/plugins/org.eclipse.jdt.junit.runtime_3.1.0/junitruntime.jar"/>
+    <classpathentry kind="lib"
+                    path="C:/PIOTRGA/Apps/java/ide/eclipse/plugins/org.eclipse.jdt.junit.runtime_3.1.0/junitruntime.jar"/>
+    <classpathentry kind="lib"
+                    path="/PIOTRGA/Apps/java/ide/eclipse/plugins/ org.eclipse.jdt.junit.runtime_3.1.0/junitruntime.jar"/>
     <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
     <classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
     <classpathentry kind="output" path="bin"/>

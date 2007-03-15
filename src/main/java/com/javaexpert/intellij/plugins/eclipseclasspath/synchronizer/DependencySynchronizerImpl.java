@@ -9,13 +9,18 @@ import com.intellij.openapi.util.JDOMExternalizable;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.vfs.VirtualFileAdapter;
 import com.intellij.openapi.vfs.VirtualFileEvent;
+import com.intellij.util.containers.ArrayListSet;
+import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathEntry;
+import static com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathEntry.Kind.VAR;
 import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathFile;
+import com.javaexpert.intellij.plugins.eclipseclasspath.VarEclipseClasspathEntry;
 import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.Registry.Registration;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternalizable, DependencySynchronizer {
     private static final String ECLIPSE_DEPENDENCIES_SUFFIX = "-eclipse_dependencies";
@@ -28,6 +33,7 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
 
     public DependencySynchronizerImpl(Module module) {
         this.setModule(module);
+        initComponent();
     }
 
     public void projectOpened() {
@@ -45,7 +51,6 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
 
     public void initComponent() {
         setLibraryHelper(new LibraryHelper(module));
-        setConfiguration(new Configuration());
         setRegistry(new Registry());
         setUi(new UI());
     }
@@ -89,7 +94,7 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
 
 
     private Library syncDependencies(EclipseClasspathFile eclipseClasspathFile) {
-        List<String> jars = eclipseClasspathFile.getJars();
+        List<EclipseClasspathEntry> jars = eclipseClasspathFile.getClasspathEntries();
         return libraryHelper.createOrRefreshLibraryWithJars(jars, registry.getLibraryName(eclipseClasspathFile.getFileName()), eclipseClasspathFile.getDir());
     }
 
@@ -98,6 +103,7 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
     }
 
     public void readExternal(Element element) throws InvalidDataException {
+        setConfiguration(new Configuration());
         configuration.readExternal(element);
     }
 
@@ -113,9 +119,15 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
         // do noting
     }
 
-    private void detectedClasspathChanges(EclipseClasspathFile eclipseClasspathFile) {
-        Library library = syncDependencies(eclipseClasspathFile);
-        ui.displayInformationDialog(library.getUrls(OrderRootType.CLASSES));
+    private void detectedClasspathChanges(EclipseClasspathFile classpathFile) {
+        Library library = syncDependencies(classpathFile);
+        Set<String> vars = new ArrayListSet<String>();
+        for (EclipseClasspathEntry e : classpathFile.getClasspathEntries())
+            if (e.kind() == VAR) {
+                vars.add(((VarEclipseClasspathEntry) e).variableName());
+            }
+
+        ui.displayInformationDialog(library.getUrls(OrderRootType.CLASSES), vars);
     }
 
     protected void setModule(Module module) {

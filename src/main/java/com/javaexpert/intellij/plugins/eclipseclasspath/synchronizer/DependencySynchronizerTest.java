@@ -82,7 +82,7 @@ public class DependencySynchronizerTest extends JDummyTestCase {
                 .method("getFileName")
                 .will(returnValue(path));
         fileMock.expects(once())
-                .method("getJars")
+                .method("getClasspathEntries")
                 .will(returnValue(jars));
         fileMock.expects(once())
                 .method("getDir")
