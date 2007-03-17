@@ -1,6 +1,7 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath;
 
-import junit.framework.TestCase;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +11,17 @@ import java.util.List;
  * Date: 2006-08-10
  * Time: 07:28:39
  */
-public class EclipseClasspathFileTest extends TestCase {
+public class EclipseClasspathFileTest {
+    @Test
     public void testPersesEclipseClasspath() {
         List<EclipseClasspathEntry> cp = new EclipseClasspathFile(this.getClass().getResource(".classpath").getPath()).getClasspathEntries();
         List<String> res = new ArrayList<String>();
         for (EclipseClasspathEntry e : cp) res.add(e.path());
-        assertEquals(res.size(), 10);
-        assertTrue(res.contains("lib/cglib-nodep-2.1_3.jar"));
-        assertTrue(!res.contains("uimocks"));
-        assertTrue(!res.contains("bin"));
-        assertTrue(!res.contains("org.eclipse.jdt.launching.JRE_CONTAINER"));
+        Assert.assertEquals(res.size(), 10);
+        assert res.contains("lib/cglib-nodep-2.1_3.jar");
+        assert !res.contains("uimocks");
+        assert !res.contains("bin");
+        assert !res.contains("org.eclipse.jdt.launching.JRE_CONTAINER");
     }
 
     public void speedTest() {

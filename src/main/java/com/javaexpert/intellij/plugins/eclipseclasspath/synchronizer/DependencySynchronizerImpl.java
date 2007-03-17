@@ -9,31 +9,30 @@ import com.intellij.openapi.util.JDOMExternalizable;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.vfs.VirtualFileAdapter;
 import com.intellij.openapi.vfs.VirtualFileEvent;
-import com.intellij.util.containers.ArrayListSet;
 import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathEntry;
-import static com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathEntry.Kind.VAR;
 import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathFile;
-import com.javaexpert.intellij.plugins.eclipseclasspath.VarEclipseClasspathEntry;
-import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.Registry.Registration;
+import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.RegistryImpl.Registration;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternalizable, DependencySynchronizer {
     private static final String ECLIPSE_DEPENDENCIES_SUFFIX = "-eclipse_dependencies";
 
     private Module module;
-    private LibraryHelper libraryHelper;
+    private LibraryManager libraryManager;
     private Configuration configuration;
     private Registry registry;
     private UI ui;
 
-    public DependencySynchronizerImpl(Module module) {
-        this.setModule(module);
-        initComponent();
+
+    public DependencySynchronizerImpl(Module module, LibraryManager libraryManager, Registry registry, UI ui) {
+        this.module = module;
+        this.libraryManager = libraryManager;
+        this.registry = registry;
+        this.ui = ui;
     }
 
     public void projectOpened() {
@@ -50,15 +49,12 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
     }
 
     public void initComponent() {
-        setLibraryHelper(new LibraryHelper(module));
-        setRegistry(new Registry());
-        setUi(new UI());
     }
 
     public void stopTracingChanges(String fileName) {
         String libraryName = registry.getLibraryName(fileName);
         registry.unregisterFileSystemListener(fileName);
-        libraryHelper.removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(libraryName);
+        libraryManager.removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(libraryName);
     }
 
     public void traceChanges(EclipseClasspathFile eclipseClasspathFile) {
@@ -95,7 +91,7 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
 
     private Library syncDependencies(EclipseClasspathFile eclipseClasspathFile) {
         List<EclipseClasspathEntry> jars = eclipseClasspathFile.getClasspathEntries();
-        return libraryHelper.createOrRefreshLibraryWithJars(jars, registry.getLibraryName(eclipseClasspathFile.getFileName()), eclipseClasspathFile.getDir());
+        return libraryManager.createOrRefreshLibraryWithJars(jars, registry.getLibraryName(eclipseClasspathFile.getFileName()), eclipseClasspathFile.getDir());
     }
 
     private String computeEclipseDependenciesLibraryDefaultName(Module currentModule) {
@@ -121,21 +117,15 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
 
     private void detectedClasspathChanges(EclipseClasspathFile classpathFile) {
         Library library = syncDependencies(classpathFile);
-        Set<String> vars = new ArrayListSet<String>();
-        for (EclipseClasspathEntry e : classpathFile.getClasspathEntries())
-            if (e.kind() == VAR) {
-                vars.add(((VarEclipseClasspathEntry) e).variableName());
-            }
-
-        ui.displayInformationDialog(library.getUrls(OrderRootType.CLASSES), vars);
+        ui.displayInformationDialog(library.getUrls(OrderRootType.CLASSES), classpathFile.usedPathVariables());
     }
 
     protected void setModule(Module module) {
         this.module = module;
     }
 
-    protected void setLibraryHelper(LibraryHelper libraryHelper) {
-        this.libraryHelper = libraryHelper;
+    protected void setLibraryHelper(LibraryManager LibraryManager) {
+        this.libraryManager = LibraryManager;
     }
 
     protected void setConfiguration(Configuration configuration) {

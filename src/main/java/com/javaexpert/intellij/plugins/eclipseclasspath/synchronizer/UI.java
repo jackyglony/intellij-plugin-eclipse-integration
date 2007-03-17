@@ -10,7 +10,7 @@ import java.util.Set;
  * Date: 2006-12-03
  * Time: 10:08:29
  */
-class UI {
+public class UI {
     public void displayInformationDialog(String[] urls, Set<String> vars) {
         String res = "";
         for (String url : urls) {
@@ -19,9 +19,9 @@ class UI {
         Messages.showMessageDialog(
                 "Added the following libs:\n" + res, "Eclipse Dependencies Update", Messages.getInformationIcon());
         if (!vars.isEmpty()) {
-            Messages.showMessageDialog("The following PATH VARIABLES have been used. Make sure you define them in your workspace and reload the project.\n" + vars
-                    , "Path variables."
-                    , Messages.getInformationIcon());
+            Messages.showDialog("The following PATH VARIABLES have been used. Make sure you define them in your workspace and reload the project.\n" + vars + "\n Do you want to reload project now?"
+                    , "Reload project?", new String[]{"Reload", "Finish"}, 0
+                    , Messages.getQuestionIcon());
         }
     }
 

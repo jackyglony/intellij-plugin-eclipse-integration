@@ -1,6 +1,6 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
-import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.Application;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.LibraryOrderEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
@@ -14,29 +14,31 @@ import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathEntry;
 import static com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathEntry.Kind.LIB;
 import static com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathEntry.Kind.VAR;
 import com.javaexpert.intellij.plugins.eclipseclasspath.VarEclipseClasspathEntry;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 import org.jmock.util.NotImplementedException;
 
 import java.util.List;
 
-class LibraryHelper {
+public class LibraryManagerImpl extends AbstractModuleComponent implements LibraryManager {
     private Module module;
+    private Application application;
+    private LibraryTablesRegistrar libraryTablesRegistrar;
 
-
-    LibraryHelper() {
-    }
-
-    public LibraryHelper(Module module) {
+    public LibraryManagerImpl(Module module, Application application, LibraryTablesRegistrar libraryTablesRegistrar) {
         this.module = module;
+        this.application = application;
+        this.libraryTablesRegistrar = libraryTablesRegistrar;
     }
 
     public void removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(String libraryName) {
-        final Library eclipseDepsLibrary = getLibraryTable(module).getLibraryByName(libraryName);
+        final Library eclipseDepsLibrary = libraryTable(module).getLibraryByName(libraryName);
 
         if (eclipseDepsLibrary != null) {
-            ApplicationManager.getApplication().runWriteAction(new Runnable() {
+            application.runWriteAction(new Runnable() {
                 public void run() {
-                    removeDependencyBetweenModuleAndLibrary(getModuleRootManager(module).getModifiableModel(), eclipseDepsLibrary);
-                    deleteLibrary(getLibraryTable(module), eclipseDepsLibrary);
+                    removeDependencyBetweenModuleAndLibrary(modifiableModel(module), eclipseDepsLibrary);
+                    deleteLibrary(libraryTable(module), eclipseDepsLibrary);
                 }
             });
         }
@@ -46,11 +48,11 @@ class LibraryHelper {
         moduleLibraryTable.removeLibrary(eclipseDepsLibrary);
     }
 
-    static LibraryTable getLibraryTable(Module currentModule) {
-        return LibraryTablesRegistrar.getInstance().getLibraryTable(currentModule.getProject());
+    private LibraryTable libraryTable(Module currentModule) {
+        return libraryTablesRegistrar.getLibraryTable(currentModule.getProject());
     }
 
-    static ModuleRootManager getModuleRootManager(Module currentModule) {
+    private ModuleRootManager moduleRootManager(Module currentModule) {
         return ModuleRootManager.getInstance(currentModule);
     }
 
@@ -113,22 +115,22 @@ class LibraryHelper {
 
     public Library createLibrary(final String libraryName, final Module currentModule) {
         Library res;
-        res = ApplicationManager.getApplication().runWriteAction(new Computable<Library>() {
+        res = application.runWriteAction(new Computable<Library>() {
             public Library compute() {
-                return getLibraryTable(currentModule).createLibrary(libraryName);
+                return libraryTable(currentModule).createLibrary(libraryName);
             }
         });
         return res;
     }
 
-    public Library getLibraryByName(String libraryName) {
-        return getLibraryTable(module).getLibraryByName(libraryName);
+    public Library findLibrary(String libraryName) {
+        return libraryTable(module).getLibraryByName(libraryName);
     }
 
     void makeModuleDependentOnLibrary(final Library lib) {
-        ApplicationManager.getApplication().runWriteAction(new Runnable() {
+        application.runWriteAction(new Runnable() {
             public void run() {
-                ModifiableRootModel moduleModel = getModuleRootManager(module).getModifiableModel();
+                ModifiableRootModel moduleModel = modifiableModel(module);
                 if (moduleModel.findLibraryOrderEntry(lib) == null) {
                     moduleModel.addLibraryEntry(lib);
                     moduleModel.commit();
@@ -137,11 +139,15 @@ class LibraryHelper {
         });
     }
 
+    private ModifiableRootModel modifiableModel(Module module) {
+        return moduleRootManager(module).getModifiableModel();
+    }
+
     void repopulateLibraryContent(final Library newLibrary, final List<EclipseClasspathEntry> libs, final String libsBaseDir) {
         //noinspection ConstantConditions
         final Library.ModifiableModel libraryModel = newLibrary.getModifiableModel();
 
-        ApplicationManager.getApplication().runWriteAction(new Runnable() {
+        application.runWriteAction(new Runnable() {
             public void run() {
                 clearLibrary(libraryModel);
                 addJarsToLibrary(libraryModel, libs, libsBaseDir);
@@ -150,8 +156,8 @@ class LibraryHelper {
         });
     }
 
-    Library getOrCreateLibrary(String libraryName) {
-        Library lib = getLibraryByName(libraryName);
+    Library findOrCreateLibrary(String libraryName) {
+        Library lib = findLibrary(libraryName);
         if (lib == null) {
             lib = createLibrary(libraryName, module);
         }
@@ -159,9 +165,15 @@ class LibraryHelper {
     }
 
     public Library createOrRefreshLibraryWithJars(List<EclipseClasspathEntry> jars, String libraryName, String jarsBasePath) {
-        Library lib = getOrCreateLibrary(libraryName);
+        Library lib = findOrCreateLibrary(libraryName);
         repopulateLibraryContent(lib, jars, jarsBasePath);
         makeModuleDependentOnLibrary(lib);
         return lib;
+    }
+
+    @NonNls
+    @NotNull
+    public String getComponentName() {
+        return "LibraryManager";
     }
 }

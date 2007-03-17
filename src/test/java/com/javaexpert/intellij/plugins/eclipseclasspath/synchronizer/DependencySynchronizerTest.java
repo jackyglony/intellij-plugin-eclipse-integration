@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collections;
+import static java.util.Collections.EMPTY_LIST;
 import java.util.List;
 
 
@@ -27,20 +28,18 @@ public class DependencySynchronizerTest extends JDummyTestCase {
 
     @Before
     public void setUp() throws Exception {
-        DependencySynchronizerImpl ds;
 
         super.setUp();
         Module module = (Module) mimicWithDummyValues(Module.class);
-        libraryHelper = mock(LibraryHelper.class);
+        libraryHelper = mock(LibraryManager.class);
         ui = mock(UI.class);
         registry = mock(Registry.class);
         fileMock = mock(EclipseClasspathFile.class);
 
-        ds = new DependencySynchronizerImpl(module);
-        ds.setLibraryHelper((LibraryHelper) libraryHelper.proxy());
-        ds.setUi((UI) ui.proxy());
-        ds.setRegistry((Registry) registry.proxy());
-        dependencySynchronizer = ds;
+        dependencySynchronizer = new DependencySynchronizerImpl(module
+                , (LibraryManager) libraryHelper.proxy()
+                , (Registry) registry.proxy()
+                , (UI) ui.proxy());
 
     }
 
@@ -71,7 +70,7 @@ public class DependencySynchronizerTest extends JDummyTestCase {
     }
 
     private void expectFullRegistrationToBeDone() {
-        List<String> jars = Collections.EMPTY_LIST;
+        List<String> jars = EMPTY_LIST;
         String libraryName = "libX";
         String path = "/some/path/x.yz";
 
@@ -84,9 +83,12 @@ public class DependencySynchronizerTest extends JDummyTestCase {
         fileMock.expects(once())
                 .method("getClasspathEntries")
                 .will(returnValue(jars));
-        fileMock.expects(once())
+        fileMock.stubs()
                 .method("getDir")
                 .will(returnValue("/some/path"));
+        fileMock.stubs()
+                .method("usedPathVariables")
+                .will(returnValue(Collections.EMPTY_SET));
         file = (EclipseClasspathFile) fileMock.proxy();
         registry.expects(once())
                 .method("registerClasspathFileModificationListener")

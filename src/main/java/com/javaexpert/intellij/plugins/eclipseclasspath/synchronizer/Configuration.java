@@ -6,17 +6,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 class Configuration {
-    private Map<String, Registry.Registration> loadedListeners = new HashMap<String, Registry.Registration>();
+    private Map<String, RegistryImpl.Registration> loadedListeners = new HashMap<String, RegistryImpl.Registration>();
 
 
     void readExternal(Element element) {
         for (Object o : element.getChildren()) {
             Element e = (Element) o;
-            getLoadedListeners().put(e.getAttributeValue("tracedFile"), new Registry.Registration(null, e.getAttributeValue("module"), e.getAttributeValue("library")));
+            getLoadedListeners().put(e.getAttributeValue("tracedFile"), new RegistryImpl.Registration(null, e.getAttributeValue("module"), e.getAttributeValue("library")));
         }
     }
 
-    public void writeExternal(Element element, Map<String, Registry.Registration> activeListeners) {
+    public void writeExternal(Element element, Map<String, RegistryImpl.Registration> activeListeners) {
         for (String url : activeListeners.keySet()) {
             Element element1 = new Element("eclipse-dependency");
             element1.setAttribute("tracedFile", url);
@@ -26,7 +26,7 @@ class Configuration {
         }
     }
 
-    Map<String, Registry.Registration> getLoadedListeners() {
+    Map<String, RegistryImpl.Registration> getLoadedListeners() {
         return loadedListeners;
     }
 }
