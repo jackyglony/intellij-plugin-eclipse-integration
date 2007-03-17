@@ -1,60 +1,26 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizerImpl.ClasspathFileModificationListener;
 
-import java.util.HashMap;
 import java.util.Map;
 
-class Registry {
-    protected static class Registration {
-        public ClasspathFileModificationListener listener;
-        public String moduleName;
-        public String libraryName;
+/**
+ * User: piotrga
+ * Date: 2007-03-17
+ * Time: 00:50:55
+ */
+public interface Registry {
+    void unregisterAllListeners();
 
-        public Registration(ClasspathFileModificationListener listener, String moduleName, String libraryName) {
-            this.listener = listener;
-            this.moduleName = moduleName;
-            this.libraryName = libraryName;
-        }
-    }
+    void unregisterFileSystemListener(String fileName);
 
-    private Map<String, Registration> registrations = new HashMap<String, Registration>();
+    String getLibraryName(String fileName);
 
-    public void unregisterAllListeners() {
-        for (Registry.Registration r : registrations.values())
-            getVirtualFileManager().removeVirtualFileListener(r.listener);
-    }
+    void registerClasspathFileModificationListener(String libraryName, DependencySynchronizerImpl.ClasspathFileModificationListener listener, String moduleName, String fileName);
 
-    public void unregisterFileSystemListener(String fileName) {
-        Registration registration = registrations.remove(fileName);
-        getVirtualFileManager().removeVirtualFileListener(registration.listener);
-    }
+    void setVirtualFileManager(VirtualFileManager virtualFileManager);
 
-    protected Registration getRegistration(String fileName) {
-        return registrations.get(fileName);
-    }
+    boolean isFileRegistered(String fileName);
 
-    public String getLibraryName(String fileName) {
-        return getRegistration(fileName).libraryName;
-    }
-
-    public void registerClasspathFileModificationListener(String libraryName, ClasspathFileModificationListener listener, String moduleName, String fileName) {
-        if (!isFileRegistered(fileName)) {
-            getVirtualFileManager().addVirtualFileListener(listener);
-            registrations.put(fileName, new Registration(listener, moduleName, libraryName));
-        }
-    }
-
-    protected VirtualFileManager getVirtualFileManager() {
-        return VirtualFileManager.getInstance();
-    }
-
-    public boolean isFileRegistered(String fileName) {
-        return registrations.containsKey(fileName);
-    }
-
-    public Map<String, Registration> getRegistrations() {
-        return registrations;
-    }
+    Map<String, RegistryImpl.Registration> getRegistrations();
 }

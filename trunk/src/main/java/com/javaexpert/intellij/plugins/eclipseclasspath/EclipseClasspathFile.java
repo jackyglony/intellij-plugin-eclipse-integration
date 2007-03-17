@@ -1,5 +1,6 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath;
 
+import com.intellij.util.containers.ArrayListSet;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class EclipseClasspathFile {
     private String fileName;
@@ -72,5 +74,14 @@ public class EclipseClasspathFile {
         } catch (IOException e) {
             throw new RuntimeException("Problem comparing paths " + fileName + " and " + path);
         }
+    }
+
+    public Set<String> usedPathVariables() {
+        Set<String> vars = new ArrayListSet<String>();
+        for (EclipseClasspathEntry e : getClasspathEntries())
+            if (e.kind() == EclipseClasspathEntry.Kind.VAR) {
+                vars.add(((VarEclipseClasspathEntry) e).variableName());
+            }
+        return vars;
     }
 }
