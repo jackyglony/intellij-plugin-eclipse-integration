@@ -6,7 +6,6 @@ import com.intellij.openapi.actionSystem.DataConstants;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizer;
-import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizerImpl;
 
 
 public class RefreshEclipseDependenciesAction extends AnAction {
@@ -54,6 +53,6 @@ public class RefreshEclipseDependenciesAction extends AnAction {
     }
 
     protected DependencySynchronizer getDependencySynchronizer(AnActionEvent e) {
-        return getModule(e).getComponent(DependencySynchronizerImpl.class);
+        return (DependencySynchronizer) getModule(e).getComponent("DependencySynchronizer");
     }
 }

@@ -32,13 +32,13 @@ public class LibraryManagerImpl extends AbstractModuleComponent implements Libra
     }
 
     public void removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(String libraryName) {
-        final Library eclipseDepsLibrary = libraryTable(module).getLibraryByName(libraryName);
+        final Library eclipseDepsLibrary = libraryTable().getLibraryByName(libraryName);
 
         if (eclipseDepsLibrary != null) {
             application.runWriteAction(new Runnable() {
                 public void run() {
-                    removeDependencyBetweenModuleAndLibrary(modifiableModel(module), eclipseDepsLibrary);
-                    deleteLibrary(libraryTable(module), eclipseDepsLibrary);
+                    removeDependencyBetweenModuleAndLibrary(modifiableModuleModel(), eclipseDepsLibrary);
+                    deleteLibrary(libraryTable(), eclipseDepsLibrary);
                 }
             });
         }
@@ -48,12 +48,12 @@ public class LibraryManagerImpl extends AbstractModuleComponent implements Libra
         moduleLibraryTable.removeLibrary(eclipseDepsLibrary);
     }
 
-    private LibraryTable libraryTable(Module currentModule) {
-        return libraryTablesRegistrar.getLibraryTable(currentModule.getProject());
+    private LibraryTable libraryTable() {
+        return libraryTablesRegistrar.getLibraryTable(module.getProject());
     }
 
-    private ModuleRootManager moduleRootManager(Module currentModule) {
-        return ModuleRootManager.getInstance(currentModule);
+    private ModuleRootManager moduleRootManager() {
+        return ModuleRootManager.getInstance(module);
     }
 
     void clearLibrary(Library.ModifiableModel model) {
@@ -113,24 +113,24 @@ public class LibraryManagerImpl extends AbstractModuleComponent implements Libra
         }
     }
 
-    public Library createLibrary(final String libraryName, final Module currentModule) {
+    public Library createLibrary(final String libraryName) {
         Library res;
         res = application.runWriteAction(new Computable<Library>() {
             public Library compute() {
-                return libraryTable(currentModule).createLibrary(libraryName);
+                return libraryTable().createLibrary(libraryName);
             }
         });
         return res;
     }
 
     public Library findLibrary(String libraryName) {
-        return libraryTable(module).getLibraryByName(libraryName);
+        return libraryTable().getLibraryByName(libraryName);
     }
 
     void makeModuleDependentOnLibrary(final Library lib) {
         application.runWriteAction(new Runnable() {
             public void run() {
-                ModifiableRootModel moduleModel = modifiableModel(module);
+                ModifiableRootModel moduleModel = modifiableModuleModel();
                 if (moduleModel.findLibraryOrderEntry(lib) == null) {
                     moduleModel.addLibraryEntry(lib);
                     moduleModel.commit();
@@ -139,8 +139,8 @@ public class LibraryManagerImpl extends AbstractModuleComponent implements Libra
         });
     }
 
-    private ModifiableRootModel modifiableModel(Module module) {
-        return moduleRootManager(module).getModifiableModel();
+    private ModifiableRootModel modifiableModuleModel() {
+        return moduleRootManager().getModifiableModel();
     }
 
     void repopulateLibraryContent(final Library newLibrary, final List<EclipseClasspathEntry> libs, final String libsBaseDir) {
@@ -159,7 +159,7 @@ public class LibraryManagerImpl extends AbstractModuleComponent implements Libra
     Library findOrCreateLibrary(String libraryName) {
         Library lib = findLibrary(libraryName);
         if (lib == null) {
-            lib = createLibrary(libraryName, module);
+            lib = createLibrary(libraryName);
         }
         return lib;
     }

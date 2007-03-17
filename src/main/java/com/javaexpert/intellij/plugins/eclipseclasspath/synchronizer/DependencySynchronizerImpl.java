@@ -23,7 +23,7 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
 
     private Module module;
     private LibraryManager libraryManager;
-    private Configuration configuration;
+    private Configuration configuration = new Configuration();
     private Registry registry;
     private UI ui;
 
