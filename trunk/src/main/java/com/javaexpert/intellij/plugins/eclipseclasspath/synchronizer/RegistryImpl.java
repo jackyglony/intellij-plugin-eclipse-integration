@@ -1,6 +1,5 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
-import com.intellij.openapi.components.BaseComponent;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizerImpl.ClasspathFileModificationListener;
 import org.jetbrains.annotations.NonNls;
@@ -9,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegistryImpl implements Registry, BaseComponent {
+public class RegistryImpl extends AbstractModuleComponent implements Registry {
     private VirtualFileManager virtualFileManager;
 
     public RegistryImpl(VirtualFileManager manager) {
@@ -19,15 +18,7 @@ public class RegistryImpl implements Registry, BaseComponent {
     @NonNls
     @NotNull
     public String getComponentName() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public void initComponent() {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public void disposeComponent() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        return "Registry";
     }
 
     protected static class Registration {

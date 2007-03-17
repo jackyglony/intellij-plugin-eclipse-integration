@@ -12,10 +12,17 @@
         <component>
             <implementation-class>com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.LibraryManagerImpl
             </implementation-class>
+
+        </component>
+        <component>
             <implementation-class>com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.RegistryImpl
             </implementation-class>
+        </component>
+        <component>
             <implementation-class>com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.UI
             </implementation-class>
+        </component>
+        <component>
             <implementation-class>
                 com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizerImpl
             </implementation-class>
