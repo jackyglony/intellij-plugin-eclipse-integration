@@ -7,13 +7,16 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
+import com.javaexpert.intellij.plugins.support.AbstractModuleComponent;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * User: piotrga
  * Date: 2007-03-18
  * Time: 11:46:38
  */
-public class IdeaModuleImpl implements IdeaModule {
+public class IdeaModuleImpl extends AbstractModuleComponent implements IdeaModule {
     private Application application;
     private Module ideaModule;
     private LibraryTablesRegistrar libraryTablesRegistrar;
@@ -52,5 +55,11 @@ public class IdeaModuleImpl implements IdeaModule {
             moduleModel.removeOrderEntry(libraryReference);
             moduleModel.commit();
         }
+    }
+
+    @NonNls
+    @NotNull
+    public String getComponentName() {
+        return "IdeaModule";
     }
 }

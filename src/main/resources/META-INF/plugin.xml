@@ -27,6 +27,11 @@
                 com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizerImpl
             </implementation-class>
         </component>
+        <component>
+            <implementation-class>
+                com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain.IdeaModuleImpl
+            </implementation-class>
+        </component>
     </module-components>
 
     <actions>
