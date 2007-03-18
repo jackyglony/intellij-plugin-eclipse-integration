@@ -20,8 +20,7 @@ import java.util.Collections;
  */
 public class LibraryManagerTest extends JDummyCGTestCase {
     LibraryManager libraryManager;
-    private Mock app;
-    private Mock libTable;
+    Mock libTable;
     Mock module;
     private Library dummyLibrary;
 
