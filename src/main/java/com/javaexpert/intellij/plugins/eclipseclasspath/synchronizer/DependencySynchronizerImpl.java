@@ -3,15 +3,17 @@ package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleComponent;
 import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.JDOMExternalizable;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.vfs.VirtualFileAdapter;
 import com.intellij.openapi.vfs.VirtualFileEvent;
-import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathEntry;
-import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathFile;
-import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.RegistryImpl.Registration;
+import com.javaexpert.intellij.plugins.eclipseclasspath.eclipse.EclipseClasspathEntry;
+import com.javaexpert.intellij.plugins.eclipseclasspath.eclipse.EclipseClasspathFile;
+import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain.Configuration;
+import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain.IdeaLibrary;
+import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain.Registry;
+import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain.RegistryImpl.Registration;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 
@@ -89,9 +91,9 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
     }
 
 
-    private Library syncDependencies(EclipseClasspathFile eclipseClasspathFile) {
+    private IdeaLibrary syncDependencies(EclipseClasspathFile eclipseClasspathFile) {
         List<EclipseClasspathEntry> jars = eclipseClasspathFile.getClasspathEntries();
-        return libraryManager.createOrRefreshLibraryWithJars(jars, registry.getLibraryName(eclipseClasspathFile.getFileName()), eclipseClasspathFile.getDir());
+        return libraryManager.createOrRefreshLibraryWithJars(registry.getLibraryName(eclipseClasspathFile.getFileName()), jars, eclipseClasspathFile.getDir());
     }
 
     private String computeEclipseDependenciesLibraryDefaultName(Module currentModule) {
@@ -116,8 +118,8 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
     }
 
     private void detectedClasspathChanges(EclipseClasspathFile classpathFile) {
-        Library library = syncDependencies(classpathFile);
-        ui.displayInformationDialog(library.getUrls(OrderRootType.CLASSES), classpathFile.usedPathVariables());
+        IdeaLibrary library = syncDependencies(classpathFile);
+        ui.displayInformationDialog(library.nativeLib().getUrls(OrderRootType.CLASSES), classpathFile.usedPathVariables());
     }
 
     protected void setModule(Module module) {
@@ -140,7 +142,7 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
         this.ui = ui;
     }
 
-    protected class ClasspathFileModificationListener extends VirtualFileAdapter {
+    public class ClasspathFileModificationListener extends VirtualFileAdapter {
         private final EclipseClasspathFile eclipseClasspathFile;
 
 

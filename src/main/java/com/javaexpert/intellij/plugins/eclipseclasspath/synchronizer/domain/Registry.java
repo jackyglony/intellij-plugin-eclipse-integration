@@ -1,6 +1,7 @@
-package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
+package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain;
 
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizerImpl;
 
 import java.util.Map;
 

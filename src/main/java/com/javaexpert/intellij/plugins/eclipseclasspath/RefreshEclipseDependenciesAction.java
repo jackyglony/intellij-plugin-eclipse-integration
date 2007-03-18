@@ -5,6 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataConstants;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.javaexpert.intellij.plugins.eclipseclasspath.eclipse.EclipseClasspathFile;
 import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizer;
 
 

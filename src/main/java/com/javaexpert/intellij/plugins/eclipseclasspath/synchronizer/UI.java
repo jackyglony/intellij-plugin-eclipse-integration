@@ -2,6 +2,7 @@ package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
+import com.javaexpert.intellij.plugins.support.AbstractModuleComponent;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 

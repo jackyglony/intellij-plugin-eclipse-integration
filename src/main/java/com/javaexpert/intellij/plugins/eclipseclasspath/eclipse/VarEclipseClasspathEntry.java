@@ -1,4 +1,4 @@
-package com.javaexpert.intellij.plugins.eclipseclasspath;
+package com.javaexpert.intellij.plugins.eclipseclasspath.eclipse;
 
 /**
  * User: piotrga

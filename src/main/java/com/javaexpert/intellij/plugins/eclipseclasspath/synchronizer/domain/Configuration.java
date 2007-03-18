@@ -1,15 +1,15 @@
-package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
+package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain;
 
 import org.jdom.Element;
 
 import java.util.HashMap;
 import java.util.Map;
 
-class Configuration {
+public class Configuration {
     private Map<String, RegistryImpl.Registration> loadedListeners = new HashMap<String, RegistryImpl.Registration>();
 
 
-    void readExternal(Element element) {
+    public void readExternal(Element element) {
         for (Object o : element.getChildren()) {
             Element e = (Element) o;
             getLoadedListeners().put(e.getAttributeValue("tracedFile"), new RegistryImpl.Registration(null, e.getAttributeValue("module"), e.getAttributeValue("library")));
@@ -26,7 +26,7 @@ class Configuration {
         }
     }
 
-    Map<String, RegistryImpl.Registration> getLoadedListeners() {
+    public Map<String, RegistryImpl.Registration> getLoadedListeners() {
         return loadedListeners;
     }
 }

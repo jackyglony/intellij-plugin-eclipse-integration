@@ -15,7 +15,7 @@
 
         </component>
         <component>
-            <implementation-class>com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.RegistryImpl
+            <implementation-class>com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain.RegistryImpl
             </implementation-class>
         </component>
         <component>

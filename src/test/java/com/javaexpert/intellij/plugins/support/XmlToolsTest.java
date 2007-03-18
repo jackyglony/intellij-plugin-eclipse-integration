@@ -1,4 +1,4 @@
-package com.javaexpert.intellij.plugins.eclipseclasspath;
+package com.javaexpert.intellij.plugins.support;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
