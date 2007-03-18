@@ -1,7 +1,8 @@
-package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
+package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain;
 
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.DependencySynchronizerImpl.ClasspathFileModificationListener;
+import com.javaexpert.intellij.plugins.support.AbstractModuleComponent;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +22,7 @@ public class RegistryImpl extends AbstractModuleComponent implements Registry {
         return "Registry";
     }
 
-    protected static class Registration {
+    public static class Registration {
         public ClasspathFileModificationListener listener;
         public String moduleName;
         public String libraryName;

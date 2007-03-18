@@ -1,7 +1,7 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
-import com.intellij.openapi.roots.libraries.Library;
-import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathEntry;
+import com.javaexpert.intellij.plugins.eclipseclasspath.eclipse.EclipseClasspathEntry;
+import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain.IdeaLibrary;
 
 import java.util.List;
 
@@ -13,5 +13,5 @@ import java.util.List;
 public interface LibraryManager {
     void removeDependencyBetweenModuleAndLibraryAndDeleteLibrary(String libraryName);
 
-    Library createOrRefreshLibraryWithJars(List<EclipseClasspathEntry> jars, String libraryName, String jarsBasePath);
+    IdeaLibrary createOrRefreshLibraryWithJars(String libraryName, List<EclipseClasspathEntry> jars, String jarsBasePath);
 }

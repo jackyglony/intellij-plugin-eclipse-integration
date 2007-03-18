@@ -1,6 +1,7 @@
-package com.javaexpert.intellij.plugins.eclipseclasspath;
+package com.javaexpert.intellij.plugins.eclipseclasspath.eclipse;
 
 import com.intellij.util.containers.ArrayListSet;
+import com.javaexpert.intellij.plugins.support.XmlTools;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;

@@ -1,6 +1,6 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
-import com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathFile;
+import com.javaexpert.intellij.plugins.eclipseclasspath.eclipse.EclipseClasspathFile;
 
 /**
  * User: piotrga

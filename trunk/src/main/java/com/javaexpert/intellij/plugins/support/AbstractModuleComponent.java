@@ -1,4 +1,4 @@
-package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
+package com.javaexpert.intellij.plugins.support;
 
 import com.intellij.openapi.module.ModuleComponent;
 

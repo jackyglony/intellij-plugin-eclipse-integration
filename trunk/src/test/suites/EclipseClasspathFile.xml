@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="EclipseClasspathFile" parallel="tests" thread-count="5" verbose="1">
+    <test name="EclipseClasspathFile">
+        <classes>
+            <class name="com.javaexpert.intellij.plugins.eclipseclasspath.EclipseClasspathFileTest"/>
+        </classes>
+    </test>
+</suite>
