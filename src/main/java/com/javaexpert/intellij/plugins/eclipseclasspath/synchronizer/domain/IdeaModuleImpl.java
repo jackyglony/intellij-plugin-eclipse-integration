@@ -1,12 +1,10 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain;
 
 import com.intellij.openapi.application.Application;
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.LibraryOrderEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.libraries.Library;
-import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
 import com.javaexpert.intellij.plugins.support.AbstractModuleComponent;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -18,13 +16,12 @@ import org.jetbrains.annotations.NotNull;
  */
 public class IdeaModuleImpl extends AbstractModuleComponent implements IdeaModule {
     private Application application;
-    private Module ideaModule;
-    private LibraryTablesRegistrar libraryTablesRegistrar;
+    private ModuleRootManager moduleRootManager;
 
 
-    public IdeaModuleImpl(Application application, Module ideaModule) {
+    public IdeaModuleImpl(Application application, ModuleRootManager moduleRootManager) {
+        this.moduleRootManager = moduleRootManager;
         this.application = application;
-        this.ideaModule = ideaModule;
     }
 
     public void makeDependentOn(final IdeaLibrary lib) {
@@ -39,12 +36,9 @@ public class IdeaModuleImpl extends AbstractModuleComponent implements IdeaModul
         });
     }
 
-    ModuleRootManager moduleRootManager() {
-        return ModuleRootManager.getInstance(ideaModule);
-    }
 
     ModifiableRootModel modifiableModuleModel() {
-        return moduleRootManager().getModifiableModel();
+        return moduleRootManager.getModifiableModel();
     }
 
     public void removeDependency(Library library) {

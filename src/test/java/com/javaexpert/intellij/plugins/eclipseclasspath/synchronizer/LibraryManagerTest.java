@@ -2,7 +2,6 @@ package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
-import com.intellij.openapi.util.Computable;
 import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain.IdeaLibrary;
 import com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain.IdeaModule;
 import com.javaexpert.jdummy.JDummyCGTestCase;
@@ -32,7 +31,7 @@ public class LibraryManagerTest extends JDummyCGTestCase {
         module = mock(IdeaModule.class);
 //        app = mock(ApplicationClassHack.class);
         libraryManager = new LibraryManagerImpl((IdeaModule) module.proxy()
-                , new ApplcationRunningTasksStub()
+                , new ApplicationRunningTasksStub()
 //                , null
                 , ((LibraryTable) libTable.proxy()));
 
@@ -85,14 +84,4 @@ public class LibraryManagerTest extends JDummyCGTestCase {
         libraryManager.removeDependencyBetweenModuleAndLibraryAndDeleteLibrary("libName");
     }
 
-    private class ApplcationRunningTasksStub extends ApplicationClassHack {
-
-        public void runWriteAction(Runnable action) {
-            action.run();
-        }
-
-        public <T> T runWriteAction(Computable<T> computation) {
-            return computation.compute();
-        }
-    }
 }

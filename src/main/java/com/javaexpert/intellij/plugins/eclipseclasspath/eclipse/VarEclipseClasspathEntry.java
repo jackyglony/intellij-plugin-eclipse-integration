@@ -6,6 +6,12 @@ package com.javaexpert.intellij.plugins.eclipseclasspath.eclipse;
  * Time: 23:52:48
  */
 public class VarEclipseClasspathEntry extends EclipseClasspathEntry {
+
+    public VarEclipseClasspathEntry(String path) {
+        super(Kind.VAR.toString());
+        setPath(path);
+    }
+
     public VarEclipseClasspathEntry() {
         super(Kind.VAR.toString());
     }

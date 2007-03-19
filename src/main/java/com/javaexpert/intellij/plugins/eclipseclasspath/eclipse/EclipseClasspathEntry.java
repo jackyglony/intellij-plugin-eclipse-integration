@@ -15,6 +15,12 @@ public class EclipseClasspathEntry {
     private String sourcePath;
     private String javadocPath;
 
+
+    public EclipseClasspathEntry(Kind kind, String path) {
+        this.path = path;
+        this.kind = kind;
+    }
+
     public EclipseClasspathEntry(String kind) {
         setKind(kind);
     }
