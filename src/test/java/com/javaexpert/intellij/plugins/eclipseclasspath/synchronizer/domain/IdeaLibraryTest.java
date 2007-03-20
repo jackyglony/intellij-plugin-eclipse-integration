@@ -1,7 +1,6 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain;
 
-import com.intellij.openapi.application.Application;
-import static com.intellij.openapi.roots.OrderRootType.CLASSES;
+import static com.intellij.openapi.roots.OrderRootType.*;
 import com.intellij.openapi.roots.libraries.Library;
 import com.javaexpert.intellij.plugins.eclipseclasspath.eclipse.EclipseClasspathEntry;
 import static com.javaexpert.intellij.plugins.eclipseclasspath.eclipse.EclipseClasspathEntry.Kind.LIB;
@@ -11,6 +10,7 @@ import net.sf.jdummy.JDummyTestCase;
 import org.jmock.Mock;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -22,9 +22,7 @@ import java.util.List;
  * Time: 20:58:45
  */
 public class IdeaLibraryTest extends JDummyTestCase {
-    private Mock nativeLib;
     private Mock modifiableModel;
-    private Application app;
     private IdeaLibrary lib;
     private List<EclipseClasspathEntry> list;
     private static final String BASE_DIR = "base/dir";
@@ -35,7 +33,7 @@ public class IdeaLibraryTest extends JDummyTestCase {
         super.setUp();
         list = new ArrayList<EclipseClasspathEntry>();
         modifiableModel = mock(Library.ModifiableModel.class);
-        nativeLib = mock(Library.class);
+        Mock nativeLib = mock(Library.class);
         nativeLib.stubs().method("getModifiableModel").will(returnValue(modifiableModel.proxy()));
         lib = new IdeaLibraryImpl(((Library) nativeLib.proxy()), new ApplicationRunningTasksStub());
     }
@@ -62,6 +60,44 @@ public class IdeaLibraryTest extends JDummyTestCase {
 
         list.add(new VarEclipseClasspathEntry("VARIABLE/some/path.jar"));
         modifiableModel.expects(once()).method("addRoot").with(eq("jar://$VARIABLE$/some/path.jar!/"), eq(CLASSES));
+
+        this.lib.repopulateEntries(list, BASE_DIR);
+    }
+
+    @Test(dataProvider = "libWithSources")
+    public void addLibWithSources(String sourcePath, String baseDir, String expected) {
+        initStubs();
+
+        EclipseClasspathEntry e = new EclipseClasspathEntry(LIB, "some/path.jar");
+        e.setSourcePath(sourcePath);
+        list.add(e);
+
+        modifiableModel.stubs().method("addRoot").with(eq("jar://base/dir/some/path.jar!/"), eq(CLASSES));
+        modifiableModel.expects(once()).method("addRoot").with(eq(expected), eq(SOURCES));
+
+        this.lib.repopulateEntries(list, baseDir);
+    }
+
+    @DataProvider()
+    public Object[][] libWithSources() {
+        return new Object[][]{
+                {"src/dir", BASE_DIR, "base/dir/src/dir"}
+                , {"/src/dir", BASE_DIR, "base/dir/../src/dir"}
+                , {"http://src/dir", BASE_DIR, "http://src/dir"}
+                , {"file://src/dir", BASE_DIR, "file://src/dir"}
+        };
+    }
+
+    @Test
+    public void addLibWithJavadoc() {
+        initStubs();
+
+        EclipseClasspathEntry e = new EclipseClasspathEntry(LIB, "some/path.jar");
+        e.setJavadocPath("javadoc/dir");
+        list.add(e);
+
+        modifiableModel.stubs().method("addRoot").with(eq("jar://base/dir/some/path.jar!/"), eq(CLASSES));
+        modifiableModel.expects(once()).method("addRoot").with(eq("base/dir/javadoc/dir"), eq(JAVADOC));
 
         this.lib.repopulateEntries(list, BASE_DIR);
     }
