@@ -1,7 +1,7 @@
 package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain;
 
 import com.intellij.openapi.application.Application;
-import com.intellij.openapi.roots.OrderRootType;
+import static com.intellij.openapi.roots.OrderRootType.*;
 import com.intellij.openapi.roots.libraries.Library;
 import com.javaexpert.intellij.plugins.eclipseclasspath.eclipse.EclipseClasspathEntry;
 import com.javaexpert.intellij.plugins.eclipseclasspath.eclipse.VarEclipseClasspathEntry;
@@ -38,8 +38,8 @@ public class IdeaLibraryImpl implements IdeaLibrary {
     }
 
     void clear(Library.ModifiableModel model) {
-        for (String url : model.getUrls(OrderRootType.CLASSES)) {
-            model.removeRoot(url, OrderRootType.CLASSES);
+        for (String url : model.getUrls(CLASSES)) {
+            model.removeRoot(url, CLASSES);
         }
     }
 
@@ -49,26 +49,30 @@ public class IdeaLibraryImpl implements IdeaLibrary {
 
             String location = transformToIntelliJLocation(entry, baseDirectory);
             if (location.toLowerCase().endsWith(".jar")) {
-                model.addRoot("jar://" + location + "!/", OrderRootType.CLASSES);
+                model.addRoot("jar://" + location + "!/", CLASSES);
             } else {
-                model.addRoot("file://" + location + "!/", OrderRootType.CLASSES);
+                model.addRoot("file://" + location + "!/", CLASSES);
             }
 
-            if (entry.sourcePath() != null) model.addRoot(entry.sourcePath(), OrderRootType.SOURCES);
-            if (entry.javadocPath() != null) model.addRoot(entry.javadocPath(), OrderRootType.JAVADOC);
+            if (entry.sourcePath() != null) model.addRoot(buildPath(entry.sourcePath(), baseDirectory), SOURCES);
+            if (entry.javadocPath() != null) model.addRoot(buildPath(entry.javadocPath(), baseDirectory), JAVADOC);
         }
     }
 
     String transformToIntelliJLocation(EclipseClasspathEntry entry, String baseDirectory) {
         if (entry.kind() == EclipseClasspathEntry.Kind.LIB) {
-            if (entry.path().startsWith("/")) return String.format("%s/..%s", baseDirectory, entry.path());
-            if (isUrl(entry.path())) return String.format("%s", entry.path());
-            return String.format("%s/%s", baseDirectory, entry.path());
+            return buildPath(entry.path(), baseDirectory);
         } else if (entry.kind() == EclipseClasspathEntry.Kind.VAR) {
             String var = ((VarEclipseClasspathEntry) entry).variableName();
-            return String.format("%s", entry.path().replaceFirst(var, "\\$" + var + "\\$"));
+            return entry.path().replaceFirst(var, "\\$" + var + "\\$");
         }
         throw new NotImplementedException("Not implemented entry kind " + entry.kind());
+    }
+
+    private String buildPath(String path, String baseDirectory) {
+        if (path.startsWith("/")) return baseDirectory + "/.." + path;
+        if (isUrl(path)) return path;
+        return baseDirectory + "/" + path;
     }
 
     boolean isUrl(String lib) {

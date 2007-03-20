@@ -17,17 +17,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaLibraryTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/ApplicationRunningTasksStub.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/testng/jmock/JMock.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaLibraryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaLibraryImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaLibraryTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaLibraryTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/testng/jmock/JMockNG.java" />
       <change type="DELETED" beforePath="C:\PIOTRGA\Src\intellij-plugin-eclipse-integration\Eclipse-Dependencies-IntelliJ-Plugin.iws" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/eclipse/VarEclipseClasspathEntry.java" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/eclipse/VarEclipseClasspathEntry.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaModuleImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaModuleImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/LibraryManagerTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/LibraryManagerTest.java" />
-      <change type="DELETED" beforePath="C:\PIOTRGA\Src\intellij-plugin-eclipse-integration\Eclipse-Dependencies-IntelliJ-Plugin.ipr" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/testng/jmock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/intellij-plugin-eclipse-integration.iws" afterPath="$PROJECT_DIR$/intellij-plugin-eclipse-integration.iws" />
+      <change type="DELETED" beforePath="C:\PIOTRGA\Src\intellij-plugin-eclipse-integration\Eclipse-Dependencies-IntelliJ-Plugin.ipr" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/testng" />
       <change type="DELETED" beforePath="C:\PIOTRGA\Src\intellij-plugin-eclipse-integration\Eclipse-Dependencies-IntelliJ-Plugin.iml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/eclipse/EclipseClasspathEntry.java" afterPath="$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/eclipse/EclipseClasspathEntry.java" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -115,19 +114,6 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaLibraryTest.java" line="73" class="com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain.IdeaLibraryTest" package="com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain">
-        <option name="ENABLED" value="true" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
       <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaLibraryImpl.java" line="40" class="com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain.IdeaLibraryImpl" package="com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain">
         <option name="ENABLED" value="true" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
@@ -196,19 +182,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Library.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$APPLICATION_HOME_DIR$/lib/src/src_openapi.zip!/com/intellij/openapi/roots/libraries/Library.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="13" selection-start="1186" selection-end="1186" vertical-scroll-proportion="0.6751918">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="IdeaLibraryTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaLibraryTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="6" selection-start="1828" selection-end="1828" vertical-scroll-proportion="0.24040921">
+            <state line="36" column="8" selection-start="1403" selection-end="1403" vertical-scroll-proportion="0.58112097">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -216,10 +193,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VarEclipseClasspathEntry.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/eclipse/VarEclipseClasspathEntry.java">
+      <file leaf-file-name="JMockNG.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/testng/jmock/JMockNG.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="20" selection-start="308" selection-end="308" vertical-scroll-proportion="0.3375959">
+            <state line="16" column="13" selection-start="364" selection-end="364" vertical-scroll-proportion="0.17316018">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JMock.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/testng/jmock/JMock.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="3" selection-start="420" selection-end="435" vertical-scroll-proportion="0.06926407">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderRootType.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$APPLICATION_HOME_DIR$/lib/src/src_openapi.zip!/com/intellij/openapi/roots/OrderRootType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="2" selection-start="950" selection-end="950" vertical-scroll-proportion="0.3809524">
               <folding />
             </state>
           </provider>
@@ -228,7 +223,7 @@
       <file leaf-file-name="IdeaLibraryImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaLibraryImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="37" selection-start="1355" selection-end="1391" vertical-scroll-proportion="0.3324468">
+            <state line="56" column="12" selection-start="2063" selection-end="2063" vertical-scroll-proportion="0.38053098">
               <folding />
             </state>
           </provider>
@@ -237,16 +232,7 @@
       <file leaf-file-name="CoreMock.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PIOTRGA-HOME$/apps/java/lib/jmock-1.1.0/src/core/src/org/jmock/core/CoreMock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="0" selection-start="1015" selection-end="1015" vertical-scroll-proportion="0.72378516">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MethodHelper.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/lib/testng-5.5-jdk15.jar!/org/testng/internal/MethodHelper.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="0" selection-start="5884" selection-end="5884" vertical-scroll-proportion="0.4574468">
+            <state line="38" column="0" selection-start="1015" selection-end="1015" vertical-scroll-proportion="0.6060606">
               <folding />
             </state>
           </provider>
@@ -255,7 +241,7 @@
       <file leaf-file-name="Invoker.class" pinned="false" current="false" current-in-tab="false">
         <entry file="jar://$PROJECT_DIR$/lib/testng-5.5-jdk15.jar!/org/testng/internal/Invoker.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="0" selection-start="4143" selection-end="4143" vertical-scroll-proportion="0.3324468">
+            <state line="43" column="0" selection-start="4143" selection-end="4143" vertical-scroll-proportion="0.30973452">
               <folding />
             </state>
           </provider>
@@ -264,7 +250,7 @@
       <file leaf-file-name="TestMethodWorker.class" pinned="false" current="false" current-in-tab="false">
         <entry file="jar://$PROJECT_DIR$/lib/testng-5.5-jdk15.jar!/org/testng/internal/TestMethodWorker.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="0" selection-start="1678" selection-end="1678" vertical-scroll-proportion="0.3324468">
+            <state line="24" column="0" selection-start="1678" selection-end="1678" vertical-scroll-proportion="0.40707964">
               <folding />
             </state>
           </provider>
@@ -273,16 +259,7 @@
       <file leaf-file-name="TestRunner.class" pinned="false" current="false" current-in-tab="false">
         <entry file="jar://$PROJECT_DIR$/lib/testng-5.5-jdk15.jar!/org/testng/TestRunner.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="103" column="0" selection-start="5894" selection-end="5894" vertical-scroll-proportion="0.3324468">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IdeaLibrary.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaLibrary.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="9" selection-start="373" selection-end="373" vertical-scroll-proportion="0.36828643">
+            <state line="103" column="0" selection-start="5894" selection-end="5894" vertical-scroll-proportion="0.18436578">
               <folding />
             </state>
           </provider>
@@ -740,11 +717,7 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert" />
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/testng" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -779,164 +752,6 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="intellij-plugin-eclipse-integration.ipr" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="intellij-plugin-eclipse-integration" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="intellij-plugin-eclipse-integration.ipr" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="intellij-plugin-eclipse-integration" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="intellij-plugin-eclipse-integration.ipr" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="intellij-plugin-eclipse-integration" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -1047,11 +862,11 @@
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="testng" />
       <recent name="com.javaexpert.intellij.plugins.support" />
       <recent name="com.javaexpert.intellij.plugins.eclipseclasspath.eclipse" />
       <recent name="com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.support" />
       <recent name="com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer.domain" />
-      <recent name="com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer" />
     </key>
   </component>
   <component name="RestoreUpdateTree" />
@@ -1381,7 +1196,7 @@
       <window_info id="TestDox" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="1" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="7" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39703903" order="4" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39703903" order="4" />
       <window_info id="DBHelper" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972583" order="3" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32963988" order="9" />
       <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32938564" order="5" />
@@ -1500,109 +1315,107 @@
     <option name="myLastEditedConfigurable" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/ApplicationRunningTasksStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="191" selection-end="218" vertical-scroll-proportion="0.15584415">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="17" selection-start="213" selection-end="213" vertical-scroll-proportion="0.15584415">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaModuleImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="75" selection-start="640" selection-end="640" vertical-scroll-proportion="0.15584415">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="20" selection-start="1358" selection-end="1358" vertical-scroll-proportion="0.4848485">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/LibraryManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="1343" selection-end="1343" vertical-scroll-proportion="0.3324468">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/src/src_openapi.zip!/com/intellij/openapi/roots/libraries/Library.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="13" selection-start="1186" selection-end="1186" vertical-scroll-proportion="0.6751918">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaLibrary.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="9" selection-start="373" selection-end="373" vertical-scroll-proportion="0.36828643">
+        <state line="15" column="9" selection-start="373" selection-end="373" vertical-scroll-proportion="0.20779221">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/eclipse/VarEclipseClasspathEntry.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="20" selection-start="308" selection-end="308" vertical-scroll-proportion="0.3375959">
+        <state line="11" column="20" selection-start="308" selection-end="308" vertical-scroll-proportion="0.1904762">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/testng-5.5-jdk15.jar!/org/testng/internal/MethodHelper.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="0" selection-start="5884" selection-end="5884" vertical-scroll-proportion="0.4574468">
+        <state line="62" column="0" selection-start="5884" selection-end="5884" vertical-scroll-proportion="0.69911504">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/testng-5.5-jdk15.jar!/org/testng/internal/Invoker.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="0" selection-start="4143" selection-end="4143" vertical-scroll-proportion="0.3324468">
+        <state line="43" column="0" selection-start="4143" selection-end="4143" vertical-scroll-proportion="0.30973452">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/testng-5.5-jdk15.jar!/org/testng/internal/TestMethodWorker.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="1678" selection-end="1678" vertical-scroll-proportion="0.3324468">
+        <state line="24" column="0" selection-start="1678" selection-end="1678" vertical-scroll-proportion="0.40707964">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/testng-5.5-jdk15.jar!/org/testng/TestRunner.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="0" selection-start="5894" selection-end="5894" vertical-scroll-proportion="0.3324468">
+        <state line="103" column="0" selection-start="5894" selection-end="5894" vertical-scroll-proportion="0.18436578">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PIOTRGA-HOME$/apps/java/lib/jmock-1.1.0/src/core/src/org/jmock/core/CoreMock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="1015" selection-end="1015" vertical-scroll-proportion="0.72378516">
+        <state line="38" column="0" selection-start="1015" selection-end="1015" vertical-scroll-proportion="0.6060606">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/src/src_openapi.zip!/com/intellij/openapi/roots/libraries/Library.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="13" selection-start="1186" selection-end="1186" vertical-scroll-proportion="0.3809524">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/src/src_openapi.zip!/com/intellij/openapi/roots/OrderRootType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="2" selection-start="950" selection-end="950" vertical-scroll-proportion="0.3809524">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaLibraryImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="37" selection-start="1355" selection-end="1391" vertical-scroll-proportion="0.3324468">
+        <state line="56" column="12" selection-start="2063" selection-end="2063" vertical-scroll-proportion="0.38053098">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/javaexpert/intellij/plugins/eclipseclasspath/eclipse/EclipseClasspathEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="11" selection-start="304" selection-end="304" vertical-scroll-proportion="0.18614718">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/testng/jmock/JMock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="3" selection-start="420" selection-end="435" vertical-scroll-proportion="0.06926407">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/testng/jmock/JMockNG.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="13" selection-start="364" selection-end="364" vertical-scroll-proportion="0.17316018">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/jdummy-1.3.2.jar!/net/sf/jdummy/JDummyTestCase.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="22" selection-start="160" selection-end="160" vertical-scroll-proportion="0.07079646">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/javaexpert/intellij/plugins/eclipseclasspath/synchronizer/domain/IdeaLibraryTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="6" selection-start="1828" selection-end="1828" vertical-scroll-proportion="0.24040921">
+        <state line="36" column="8" selection-start="1403" selection-end="1403" vertical-scroll-proportion="0.58112097">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
