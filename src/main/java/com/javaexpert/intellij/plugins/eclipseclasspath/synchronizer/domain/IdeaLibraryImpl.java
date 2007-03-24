@@ -45,21 +45,40 @@ public class IdeaLibraryImpl implements IdeaLibrary {
 
     void addJars(Library.ModifiableModel model, List<EclipseClasspathEntry> jars, String baseDirectory) {
         for (EclipseClasspathEntry entry : jars) {
-//            VirtualFile f = VirtualFileManager.getInstance().findFileByUrl(transformToIntelliJLocation(entry, baseDirectory));
 
-            String location = transformToIntelliJLocation(entry, baseDirectory);
-            if (location.toLowerCase().endsWith(".jar")) {
-                model.addRoot("jar://" + location + "!/", CLASSES);
-            } else {
-                model.addRoot("file://" + location + "!/", CLASSES);
-            }
+            String location = transformClasspathToInteliJLocation(entry, baseDirectory);
+            location = addProtocolToClasspathLocation(location);
 
-            if (entry.sourcePath() != null) model.addRoot(buildPath(entry.sourcePath(), baseDirectory), SOURCES);
-            if (entry.javadocPath() != null) model.addRoot(buildPath(entry.javadocPath(), baseDirectory), JAVADOC);
+            model.addRoot(location, CLASSES);
+
+
+            if (entry.sourcePath() != null)
+                model.addRoot(transformOtherPathToIntelliJLocation(entry.sourcePath(), baseDirectory), SOURCES);
+            if (entry.javadocPath() != null)
+                model.addRoot(transformOtherPathToIntelliJLocation(entry.javadocPath(), baseDirectory), JAVADOC);
         }
     }
 
-    String transformToIntelliJLocation(EclipseClasspathEntry entry, String baseDirectory) {
+    private String transformOtherPathToIntelliJLocation(String s, String baseDirectory) {
+        String res = buildPath(s, baseDirectory);
+        return addFileProtocolIfNotUrl(res);
+    }
+
+    private String addProtocolToClasspathLocation(String location) {
+        if (location.toLowerCase().endsWith(".jar")) {
+            location = "jar://" + location + "!/";
+        } else {
+            location = addFileProtocolIfNotUrl(location);
+        }
+        return location;
+    }
+
+    private String addFileProtocolIfNotUrl(String location) {
+        if (!isUrl(location)) location = "file://" + location;
+        return location;
+    }
+
+    String transformClasspathToInteliJLocation(EclipseClasspathEntry entry, String baseDirectory) {
         if (entry.kind() == EclipseClasspathEntry.Kind.LIB) {
             return buildPath(entry.path(), baseDirectory);
         } else if (entry.kind() == EclipseClasspathEntry.Kind.VAR) {
@@ -70,8 +89,7 @@ public class IdeaLibraryImpl implements IdeaLibrary {
     }
 
     private String buildPath(String path, String baseDirectory) {
-        if (path.startsWith("/")) return baseDirectory + "/.." + path;
-        if (isUrl(path)) return path;
+        if (path.startsWith("/") || isUrl(path)) return path;
         return baseDirectory + "/" + path;
     }
 

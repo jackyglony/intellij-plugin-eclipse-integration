@@ -14,6 +14,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -44,15 +45,6 @@ public class IdeaLibraryTest extends JDummyTestCase {
         super.tearDown();
     }
 
-    @Test
-    public void addRelativeLibJarEntry() {
-        testOneEntry("some/path.jar", LIB, "jar://base/dir/some/path.jar!/");
-    }
-
-    @Test
-    public void addWorkspaceRelativeLibJarEntry() {
-        testOneEntry("/some/path.jar", LIB, "jar://base/dir/../some/path.jar!/");
-    }
 
     @Test
     public void addVar() {
@@ -64,8 +56,8 @@ public class IdeaLibraryTest extends JDummyTestCase {
         this.lib.repopulateEntries(list, BASE_DIR);
     }
 
-    @Test(dataProvider = "libWithSources")
-    public void addLibWithSources(String sourcePath, String baseDir, String expected) {
+    @Test(dataProvider = "sourcePaths")
+    public void addLibWithSources(String testName, String sourcePath, String baseDir, String expected) {
         initStubs();
 
         EclipseClasspathEntry e = new EclipseClasspathEntry(LIB, "some/path.jar");
@@ -75,32 +67,23 @@ public class IdeaLibraryTest extends JDummyTestCase {
         modifiableModel.stubs().method("addRoot").with(eq("jar://base/dir/some/path.jar!/"), eq(CLASSES));
         modifiableModel.expects(once()).method("addRoot").with(eq(expected), eq(SOURCES));
 
-        this.lib.repopulateEntries(list, baseDir);
+        lib.repopulateEntries(list, baseDir);
     }
 
-    @DataProvider()
-    public Object[][] libWithSources() {
-        return new Object[][]{
-                {"src/dir", BASE_DIR, "base/dir/src/dir"}
-                , {"/src/dir", BASE_DIR, "base/dir/../src/dir"}
-                , {"http://src/dir", BASE_DIR, "http://src/dir"}
-                , {"file://src/dir", BASE_DIR, "file://src/dir"}
-        };
-    }
-
-    @Test
-    public void addLibWithJavadoc() {
+    @Test(dataProvider = "javaDocPaths")
+    public void addLibWithJavadoc(String testName, String sourcePath, String baseDir, String expected) {
         initStubs();
 
         EclipseClasspathEntry e = new EclipseClasspathEntry(LIB, "some/path.jar");
-        e.setJavadocPath("javadoc/dir");
+        e.setJavadocPath(sourcePath);
         list.add(e);
 
         modifiableModel.stubs().method("addRoot").with(eq("jar://base/dir/some/path.jar!/"), eq(CLASSES));
-        modifiableModel.expects(once()).method("addRoot").with(eq("base/dir/javadoc/dir"), eq(JAVADOC));
+        modifiableModel.expects(once()).method("addRoot").with(eq(expected), eq(JAVADOC));
 
-        this.lib.repopulateEntries(list, BASE_DIR);
+        lib.repopulateEntries(list, baseDir);
     }
+
 
     @Test
     public void clearsLibBeforeAddingNewStuff() {
@@ -110,18 +93,51 @@ public class IdeaLibraryTest extends JDummyTestCase {
         lib.repopulateEntries(list, "");
     }
 
-    private void testOneEntry(String path, EclipseClasspathEntry.Kind lib, String expectedPath) {
+    @Test(dataProvider = "classPaths")
+    public void testOneEntry(String testName, String path, String baseDir, String expectedPath) {
         initStubs();
 
-        list.add(new EclipseClasspathEntry(lib, path));
+        list.add(new EclipseClasspathEntry(LIB, path));
         modifiableModel.expects(once()).method("addRoot").with(eq(expectedPath), eq(CLASSES));
 
-        this.lib.repopulateEntries(list, BASE_DIR);
+        this.lib.repopulateEntries(list, baseDir);
     }
+
 
     private void initStubs() {
         modifiableModel.stubs().method("getUrls").will(returnValue(new String[0]));
         modifiableModel.stubs().method("commit");
+    }
+
+    @DataProvider()
+    public Object[][] classPaths() {
+        return sum(sourcePaths(), new Object[][]{
+                {"Absolute Jar", "/src/lib.jar", BASE_DIR, "jar:///src/lib.jar!/"}
+                , {"Relative Jar", "src/lib.jar", BASE_DIR, "jar://base/dir/src/lib.jar!/"}
+        });
+    }
+
+    private Object[][] sum(Object[][] objects, Object[][] objects1) {
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.addAll(Arrays.asList(objects));
+        list.addAll(Arrays.asList(objects1));
+        return (Object[][]) list.toArray(new Object[0][0]);
+    }
+
+    @DataProvider()
+    public Object[][] javaDocPaths() {
+        return sum(sourcePaths(), new Object[][]{
+                {"Http Url", "http://src/dir", BASE_DIR, "http://src/dir"}
+        });
+    }
+
+    @DataProvider()
+    public Object[][] sourcePaths() {
+        return new Object[][]{
+                {"Relative", "src/dir", BASE_DIR, "file://base/dir/src/dir"}
+                , {"Absolute", "/src/dir", BASE_DIR, "file:///src/dir"}
+                , {"File URL", "file://src/dir", BASE_DIR, "file://src/dir"}
+        };
     }
 
 }
