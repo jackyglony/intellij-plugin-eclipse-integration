@@ -26,8 +26,8 @@ public class JMockNG extends JMock {
      * @param mockedType The type to be mocked.
      * @return A {@link Mock} object that mocks <var>mockedType</var>.
      */
-    public static Mock mock(Class mockedType) {
-        return mock(mockedType, defaultMockNameForType(mockedType));
+    public static <T> Mock2<T> mock(Class<T> mockedType) {
+        return (Mock2<T>) mock(mockedType, defaultMockNameForType(mockedType));
     }
 
     /**
