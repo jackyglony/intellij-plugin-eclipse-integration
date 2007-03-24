@@ -14,7 +14,7 @@ import java.util.Set;
  * Time: 10:08:29
  */
 public class UI extends AbstractModuleComponent {
-    public void displayInformationDialog(String[] urls, Set<String> vars) {
+    public boolean displayInformationDialog(String[] urls, Set<String> vars) {
         String res = "";
         for (String url : urls) {
             res += url + "\n";
@@ -22,10 +22,12 @@ public class UI extends AbstractModuleComponent {
         Messages.showMessageDialog(
                 "Added the following libs:\n" + res, "Eclipse Dependencies Update", Messages.getInformationIcon());
         if (!vars.isEmpty()) {
-            Messages.showDialog("The following PATH VARIABLES have been used. Make sure you define them in your workspace and reload the project.\n" + vars + "\n Do you want to reload project now?"
+            int buttonIndex = Messages.showDialog("The following PATH VARIABLES have been used. Make sure you define them in your workspace and reload the project.\n" + vars + "\n Do you want to reload project now?"
                     , "Reload project?", new String[]{"Reload now!", "Reload later manually"}, 0
                     , Messages.getQuestionIcon());
+            return buttonIndex == 0;
         }
+        return false;
     }
 
     public void displayNoProjectSelectedWarnning() {

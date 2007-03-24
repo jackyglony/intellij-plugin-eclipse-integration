@@ -42,7 +42,10 @@ public class DependencySynchronizerTest extends JDummyTestCase {
         dependencySynchronizer = new DependencySynchronizerImpl(module
                 , (LibraryManager) libraryHelper.proxy()
                 , (Registry) registry.proxy()
-                , (UI) ui.proxy());
+                , (UI) ui.proxy()
+                , null
+                , null
+        );
 
     }
 
@@ -107,7 +110,7 @@ public class DependencySynchronizerTest extends JDummyTestCase {
                 .with(eq(libraryName), eq(jars), ANYTHING)
                 .will(returnValue(mimicWithDummyValues(IdeaLibrary.class)));
         ui.expects(once())
-                .method("displayInformationDialog");
+                .method("displayInformationDialog").will(returnValue(false));
         file = (EclipseClasspathFile) fileMock.proxy();
     }
 
