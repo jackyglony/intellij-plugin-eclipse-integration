@@ -2,6 +2,8 @@ package com.javaexpert.intellij.plugins.eclipseclasspath.synchronizer;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleComponent;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.JDOMExternalizable;
@@ -28,13 +30,17 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
     private Configuration configuration = new Configuration();
     private Registry registry;
     private UI ui;
+    private Project project;
+    private ProjectManager projectManager;
 
 
-    public DependencySynchronizerImpl(Module module, LibraryManager libraryManager, Registry registry, UI ui) {
+    public DependencySynchronizerImpl(Module module, LibraryManager libraryManager, Registry registry, UI ui, Project project, ProjectManager projectManager) {
         this.module = module;
         this.libraryManager = libraryManager;
         this.registry = registry;
         this.ui = ui;
+        this.project = project;
+        this.projectManager = projectManager;
     }
 
     public void projectOpened() {
@@ -119,7 +125,12 @@ public class DependencySynchronizerImpl implements ModuleComponent, JDOMExternal
 
     private void detectedClasspathChanges(EclipseClasspathFile classpathFile) {
         IdeaLibrary library = syncDependencies(classpathFile);
-        ui.displayInformationDialog(library.nativeLib().getUrls(OrderRootType.CLASSES), classpathFile.usedPathVariables());
+        boolean reloadProject = ui.displayInformationDialog(library.nativeLib().getUrls(OrderRootType.CLASSES), classpathFile.usedPathVariables());
+        if (reloadProject) projectManager().reloadProject(project);
+    }
+
+    private ProjectManager projectManager() {
+        return projectManager;
     }
 
     protected void setModule(Module module) {
